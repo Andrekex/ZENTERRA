@@ -38,20 +38,23 @@ add_filter( 'wp_resource_hints', function ( $urls, $relation ) {
 }, 10, 2 );
 
 add_action( 'wp_head', function () {
-	// Theme favicon, unless a Site Icon is set in the Customizer.
+	// Theme favicons, unless a Site Icon is set in the Customizer.
 	if ( ! has_site_icon() ) {
-		printf( '<link rel="icon" href="%s" type="image/svg+xml">' . "\n", esc_url( get_template_directory_uri() . '/assets/favicon.svg' ) );
+		$assets = get_template_directory_uri() . '/assets/';
+		printf( '<link rel="icon" href="%s" type="image/svg+xml">' . "\n", esc_url( $assets . 'favicon.svg' ) );
+		printf( '<link rel="icon" href="%s" type="image/png" sizes="32x32">' . "\n", esc_url( $assets . 'favicon-32.png' ) );
+		printf( '<link rel="apple-touch-icon" href="%s">' . "\n", esc_url( $assets . 'apple-touch-icon.png' ) );
 	}
 
 	// Leave meta tags to an SEO plugin when one is active.
 	if ( is_front_page() && ! defined( 'WPSEO_VERSION' ) && ! class_exists( 'RankMath' ) ) {
-		$description = 'Zenterra is an AI-first studio from Lviv, Ukraine. We build websites and AI solutions with Claude — fast, at a fixed price, with every line of code reviewed by a team lead.';
+		$description = 'Zenterra is an AI-first studio. We build websites, apps and AI solutions with Claude — fast, at a fixed price, with every line of code reviewed by a team lead.';
 		printf( '<meta name="description" content="%s">' . "\n", esc_attr( $description ) );
 		printf( '<meta property="og:title" content="%s">' . "\n", esc_attr( 'Zenterra — Websites & AI solutions built with Claude' ) );
 		printf( '<meta property="og:description" content="%s">' . "\n", esc_attr( 'Fast, fixed-price websites and AI solutions. Every line reviewed.' ) );
 		echo '<meta property="og:type" content="website">' . "\n";
 	}
-	echo '<meta name="theme-color" content="#0f1512">' . "\n";
+	echo '<meta name="theme-color" content="#5c16ff">' . "\n";
 }, 1 );
 
 /**
@@ -66,9 +69,8 @@ function zenterra_section_url( $id ) {
  */
 function zenterra_logo() {
 	?>
-	<a href="<?php echo esc_url( is_front_page() ? '#top' : home_url( '/' ) ); ?>" class="logo" aria-label="<?php esc_attr_e( 'Zenterra home', 'zenterra' ); ?>">
-		<svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M9 10h14L9 22h14" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-		<span>Zenterra</span>
+	<a href="<?php echo esc_url( is_front_page() ? '#top' : home_url( '/' ) ); ?>" class="logo">
+		<img class="logo-img" src="<?php echo esc_url( get_template_directory_uri() . '/assets/logo.svg' ); ?>" alt="Zenterra" width="120" height="28">
 	</a>
 	<?php
 }

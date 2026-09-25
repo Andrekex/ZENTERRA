@@ -100,7 +100,7 @@ window.addEventListener('scroll', onScroll, { passive: true });
 // Fade elements in as they scroll into view, staggered within each group.
 // Only elements below the fold are hidden, so nothing visible flashes on load.
 const REVEAL = [
-  '.section-head', '.table-wrap', '.callout', '.service', '.audiences h3', '.chips li',
+  '.section-head', '.table-wrap', '.callout', '.service', '.audiences h3', '.chips li', '.stack h3', '.stack-grid > div',
   '.tabs', '.price', '.terms h3', '.terms-list li', '.steps li', '.cycle li',
   '.quality-grid .card', '.agencies-inner > div > *', '.faq details',
   '.contact-inner > div', '.contact-inner .form', '.entry',
@@ -144,3 +144,50 @@ if (!reduceMotion.matches && 'IntersectionObserver' in window) {
   items.forEach((el) => el.classList.add('reveal'));
   items.forEach((el) => { stagger(el); observer.observe(el); });
 }
+
+// ---------- Spotlight border on cards (fine pointers) ----------
+if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  document.querySelectorAll('.card, .steps li, .cycle li, .stack-grid > div').forEach((el) => {
+    el.classList.add('spot');
+    el.addEventListener('pointermove', (e) => {
+      const r = el.getBoundingClientRect();
+      el.style.setProperty('--mx', `${e.clientX - r.left}px`);
+      el.style.setProperty('--my', `${e.clientY - r.top}px`);
+    });
+  });
+
+  // ---------- Magnetic primary buttons ----------
+  if (!reduceMotion.matches) {
+    document.querySelectorAll('.btn-primary').forEach((btn) => {
+      btn.addEventListener('pointermove', (e) => {
+        const r = btn.getBoundingClientRect();
+        const x = e.clientX - r.left - r.width / 2;
+        const y = e.clientY - r.top - r.height / 2;
+        btn.style.transform = `translate(${x * 0.15}px, ${y * 0.3 - 2}px)`;
+      });
+      btn.addEventListener('pointerleave', () => { btn.style.transform = ''; });
+    });
+  }
+}
+
+// ---------- FAQ: animate open/close height ----------
+document.querySelectorAll('.faq details').forEach((d) => {
+  const summary = d.querySelector('summary');
+  summary.addEventListener('click', (e) => {
+    if (reduceMotion.matches || d.classList.contains('animating')) {
+      if (d.classList.contains('animating')) e.preventDefault();
+      return;
+    }
+    e.preventDefault();
+    d.classList.add('animating');
+    const collapsed = summary.offsetHeight;
+    if (d.open) {
+      const anim = d.animate({ height: [`${d.offsetHeight}px`, `${collapsed}px`] }, { duration: 240, easing: 'ease' });
+      anim.onfinish = () => { d.open = false; d.classList.remove('animating'); };
+    } else {
+      d.open = true;
+      const anim = d.animate({ height: [`${collapsed}px`, `${d.offsetHeight}px`] }, { duration: 300, easing: 'cubic-bezier(.2, .7, .2, 1)' });
+      anim.onfinish = () => { d.classList.remove('animating'); };
+    }
+  });
+});

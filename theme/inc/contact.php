@@ -16,6 +16,7 @@ function zenterra_contact_topics() {
 		'AI chatbot / assistant',
 		'AI automation',
 		'AI audit',
+		'Web or mobile app / MVP',
 		'White-label partnership',
 		'Something else',
 	);
@@ -25,12 +26,15 @@ function zenterra_contact_budgets() {
 	return array( 'Under $1,500', '$1,500–3,000', '$3,000–6,000', '$6,000+', 'Not sure yet' );
 }
 
+define( 'ZENTERRA_DEFAULT_EMAIL', 'administration@zenterrait.com' );
+
 /**
- * Where requests are sent. Set under Appearance → Customize → Contact form.
+ * Where requests are sent, also shown on the page.
+ * Can be overridden under Appearance → Customize → Contact form.
  */
 function zenterra_contact_email() {
 	$email = get_theme_mod( 'zenterra_contact_email', '' );
-	return is_email( $email ) ? $email : get_option( 'admin_email' );
+	return is_email( $email ) ? $email : ZENTERRA_DEFAULT_EMAIL;
 }
 
 add_action( 'customize_register', function ( $wp_customize ) {
@@ -44,7 +48,7 @@ add_action( 'customize_register', function ( $wp_customize ) {
 	) );
 	$wp_customize->add_control( 'zenterra_contact_email', array(
 		'label'       => __( 'Send requests to', 'zenterra' ),
-		'description' => __( 'Also shown on the page. Leave empty to use the site admin email.', 'zenterra' ),
+		'description' => __( 'Also shown on the page. Leave empty to use administration@zenterrait.com.', 'zenterra' ),
 		'section'     => 'zenterra_contact',
 		'type'        => 'email',
 	) );

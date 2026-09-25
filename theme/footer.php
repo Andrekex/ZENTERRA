@@ -2,7 +2,7 @@
 	<div class="container footer-inner">
 		<div>
 			<?php zenterra_logo(); ?>
-			<p class="muted small">Websites and AI solutions built with Claude.<br>Lviv, Ukraine · working with clients in the US and EU.</p>
+			<p class="muted small">Websites and AI solutions built with Claude.<br>Working with clients in the US and EU.</p>
 		</div>
 		<nav class="footer-nav" aria-label="<?php esc_attr_e( 'Footer', 'zenterra' ); ?>">
 			<a href="<?php echo esc_url( zenterra_section_url( 'services' ) ); ?>">Services</a>

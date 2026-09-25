@@ -22,9 +22,10 @@ get_header();
 <main id="main">
 <!-- Hero -->
 <section class="hero" id="top">
+  <span class="hero-blob" aria-hidden="true"></span>
   <div class="container hero-inner">
-    <p class="eyebrow">AI-first studio · Lviv, Ukraine</p>
-    <h1>Websites and AI solutions built with Claude.<br><span class="accent">Every line reviewed.</span></h1>
+    <p class="eyebrow">AI-first studio</p>
+    <h1><span class="w"><span>Websites</span></span> <span class="w"><span>and</span></span> <span class="w"><span>AI</span></span> <span class="w"><span>solutions</span></span> <span class="w"><span>built</span></span> <span class="w"><span>with</span></span> <span class="w"><span>Claude.</span></span><br><span class="w accent-w"><span class="accent">Every line reviewed.</span></span></h1>
     <p class="lead">You get the speed of AI and quality someone is accountable for. We ship at a fixed price, and a team lead reviews every change before it reaches you.</p>
     <div class="hero-cta">
       <a href="#contact" class="btn btn-primary">Get a proposal in 48 hours</a>
@@ -36,6 +37,12 @@ get_header();
       <div><dt>2 revision rounds</dt><dd>included in every project</dd></div>
       <div><dt>100% reviewed</dt><dd>every pull request, by a human</dd></div>
     </dl>
+  </div>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>WordPress</span><span>Next.js</span><span>React</span><span>React Native</span><span>Node.js</span><span>NestJS</span><span>TypeScript</span><span>JavaScript</span><span>Wix Studio</span><span>Webflow</span><span>Claude API</span><span>iOS & Android</span><span>WordPress</span><span>Next.js</span><span>React</span><span>React Native</span><span>Node.js</span><span>NestJS</span><span>TypeScript</span><span>JavaScript</span><span>Wix Studio</span><span>Webflow</span><span>Claude API</span><span>iOS & Android</span>
+    </div>
   </div>
 </section>
 
@@ -71,18 +78,19 @@ get_header();
   <div class="container">
     <div class="section-head">
       <p class="eyebrow">Services</p>
-      <h2>Two things, done well</h2>
+      <h2>What we build</h2>
     </div>
-    <div class="grid-2">
+    <div class="grid-3">
       <article class="card service">
         <div class="service-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01"/></svg>
         </div>
         <h3>Websites</h3>
-        <p class="muted">On Wix Studio, Webflow or Next.js.</p>
+        <p class="muted">On WordPress, Next.js, Wix Studio or Webflow.</p>
         <ul class="checks">
           <li>Landing pages and company websites</li>
-          <li>Redesigns and migrations from WordPress, Squarespace and more</li>
+          <li>Custom WordPress themes and plugins</li>
+          <li>Redesigns and migrations from Squarespace, older WordPress sites and more</li>
           <li>Simple online stores</li>
           <li>Multilingual sites, animations and integrations</li>
           <li>Monthly support and updates</li>
@@ -93,7 +101,7 @@ get_header();
           <svg viewBox="0 0 24 24"><path d="M12 3l1.8 4.6L18.5 9l-4.7 1.4L12 15l-1.8-4.6L5.5 9l4.7-1.4z"/><path d="M18 15l.9 2.1L21 18l-2.1.9L18 21l-.9-2.1L15 18l2.1-.9z"/></svg>
         </div>
         <h3>AI solutions</h3>
-        <p class="muted">Built on Claude, led by our founder.</p>
+        <p class="muted">Built on Claude, designed and reviewed in-house.</p>
         <ul class="checks">
           <li>Chatbots and assistants trained on your own knowledge base (RAG)</li>
           <li>Automated handling of leads, requests and documents</li>
@@ -101,6 +109,31 @@ get_header();
           <li>AI audit: where AI will pay off in your business, with a prototype</li>
         </ul>
       </article>
+      <article class="card service">
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg>
+        </div>
+        <h3>Apps &amp; MVPs</h3>
+        <p class="muted">For startups that need a first version fast.</p>
+        <ul class="checks">
+          <li>Web apps in React and Next.js</li>
+          <li>Mobile apps for iOS and Android with React Native</li>
+          <li>Backends and APIs in Node.js and NestJS</li>
+          <li>MVPs with AI features built in</li>
+          <li>Projects typically from $3,000, quoted after a short scoping call</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="stack">
+      <h3 class="h-small">Our stack</h3>
+      <dl class="stack-grid">
+        <div><dt>Frontend</dt><dd>HTML</dd><dd>CSS</dd><dd>JavaScript</dd><dd>TypeScript</dd><dd>React</dd><dd>Next.js</dd></div>
+        <div><dt>Backend</dt><dd>Node.js</dd><dd>NestJS</dd><dd>REST APIs</dd></div>
+        <div><dt>Mobile</dt><dd>React Native</dd><dd>iOS</dd><dd>Android</dd></div>
+        <div><dt>CMS &amp; builders</dt><dd>WordPress</dd><dd>Wix Studio</dd><dd>Webflow</dd></div>
+        <div><dt>AI</dt><dd>Claude API</dd><dd>RAG</dd><dd>AI automation</dd></div>
+      </dl>
     </div>
     <div class="audiences">
       <h3 class="h-small">Who we work with</h3>
@@ -272,7 +305,7 @@ get_header();
     <div>
       <p class="eyebrow">For agencies</p>
       <h2>Your brand. Our team. Fixed price.</h2>
-      <p class="section-lead">Too many orders and not enough people? You handle sales and the client relationship. We build websites on Wix Studio or Next.js, plus AI integrations, under your brand.</p>
+      <p class="section-lead">Too many orders and not enough people? You handle sales and the client relationship. We build websites on WordPress, Next.js, Wix Studio or Webflow, plus apps and AI integrations, under your brand.</p>
       <ul class="checks">
         <li>White-label delivery, with no contact with your clients unless you want it</li>
         <li>Fixed price per project, so your margin is predictable</li>
@@ -305,8 +338,8 @@ get_header();
         <p>You do. All rights to the work transfer to you once it's paid for. Your site, hosting and API keys stay on your own accounts from day one.</p>
       </details>
       <details>
-        <summary>Which platform should I choose: Wix Studio, Webflow or Next.js?</summary>
-        <p>Wix Studio and Webflow are great if you want to edit content yourself without a developer. Next.js suits custom functionality, performance-critical sites and deeper integrations. We'll recommend one during the brief.</p>
+        <summary>Which platform should I choose: WordPress, Next.js, Wix Studio or Webflow?</summary>
+        <p>WordPress is the flexible all-rounder with a huge plugin ecosystem, great for content-heavy sites and blogs. Wix Studio and Webflow suit teams that want to edit visually without a developer. Next.js is best for custom functionality, speed and deeper integrations. We'll recommend one during the brief.</p>
       </details>
       <details>
         <summary>What happens if I need changes beyond the two revision rounds?</summary>
@@ -331,14 +364,11 @@ get_header();
       <p class="eyebrow">Start a project</p>
       <h2>Tell us what you need</h2>
       <p class="section-lead">Answer a few questions and we'll reply within 24–48 hours with a scope, a timeline and a fixed price.</p>
-      <div class="founder">
-        <div class="avatar" aria-hidden="true">AK</div>
-        <div>
-          <p class="founder-name">Andrii Kostin</p>
-          <p class="muted">Founder &amp; team lead · Lviv, Ukraine</p>
-        </div>
-      </div>
-      <p class="muted small">Prefer email? Write to <a href="mailto:<?php echo esc_attr( antispambot( $contact_email ) ); ?>"><?php echo esc_html( antispambot( $contact_email ) ); ?></a>.</p>
+      <ul class="contact-points">
+        <li><span class="muted">Email</span><a href="mailto:<?php echo esc_attr( antispambot( $contact_email ) ); ?>"><?php echo esc_html( antispambot( $contact_email ) ); ?></a></li>
+        <li><span class="muted">Response</span>Within 24–48 hours</li>
+        <li><span class="muted">NDA</span>Available on request</li>
+      </ul>
     </div>
 
     <form class="card form" id="contact-form" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" novalidate>
