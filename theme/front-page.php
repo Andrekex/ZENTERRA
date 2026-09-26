@@ -329,8 +329,9 @@ get_header();
 
 <!-- Agencies -->
 <section class="section section-dark" id="agencies">
-  <div class="container agencies-inner">
-    <div>
+  <div class="container">
+   <div class="agencies-panel">
+    <div class="agencies-copy">
       <p class="eyebrow"><?php esc_html_e( 'For agencies', 'zenterra' ); ?></p>
       <h2><?php esc_html_e( 'Your brand. Our team. Fixed price.', 'zenterra' ); ?></h2>
       <p class="section-lead"><?php esc_html_e( 'Too many orders and not enough people? You handle sales and the client relationship. We build websites on WordPress, Next.js, Wix Studio or Webflow, plus apps and AI integrations, under your brand.', 'zenterra' ); ?></p>
@@ -342,6 +343,20 @@ get_header();
       </ul>
       <a href="#contact" class="btn btn-primary" data-topic="White-label partnership"><?php esc_html_e( 'Talk about a partnership', 'zenterra' ); ?></a>
     </div>
+
+    <div class="wl-visual" aria-hidden="true">
+      <div class="wl-card wl-back">
+        <span class="wl-tag">Zenterra</span>
+        <i></i><i></i><i class="short"></i><i></i>
+      </div>
+      <div class="wl-card wl-front">
+        <span class="wl-logo"><?php esc_html_e( 'Your brand', 'zenterra' ); ?></span>
+        <i class="wl-hero"></i>
+        <i></i><i class="short"></i><i></i>
+        <span class="wl-check"><svg viewBox="0 0 24 24"><path d="M6 12.5l4 4 8-9"/></svg><?php esc_html_e( 'Reviewed', 'zenterra' ); ?></span>
+      </div>
+    </div>
+   </div>
   </div>
 </section>
 

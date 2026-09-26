@@ -806,3 +806,8 @@ msgstr "Усі права захищено."
 msgid "Back to top"
 msgstr "Нагору"
 
+msgid "Your brand"
+msgstr "Ваш бренд"
+
+msgid "Reviewed"
+msgstr "Перевірено"

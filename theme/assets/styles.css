@@ -306,7 +306,7 @@ main, .site-footer { position: relative; z-index: 1; }
   transform: translate3d(calc(var(--s, 0) * -30vw + var(--px, 0) * 5vw), calc(var(--s, 0) * -115vh + var(--py, 0) * 5vh), 0) rotate(calc(var(--s, 0) * 140deg));
 }
 /* Code lines and review scanner, drawn by bg.js */
-.zt-code { position: absolute; inset: 0; width: 100%; height: 100%; }
+.zt-code { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .85; }
 .zt-bg::after {
   content: "";
   position: absolute; inset: 0;
@@ -466,15 +466,81 @@ main, .site-footer { position: relative; z-index: 1; }
 .quality-grid .card h3 { font-size: 1.35rem; }
 
 /* ---------- Agencies ---------- */
-.section-dark { background: var(--dark-bg); color: var(--dark-text); }
+/* "For agencies": a glowing violet panel that stays dark in both themes */
+.agencies-panel {
+  position: relative;
+  display: grid; grid-template-columns: 1.15fr .85fr; gap: 3rem; align-items: center;
+  padding: clamp(2rem, 5vw, 4rem);
+  border-radius: 28px;
+  overflow: hidden;
+  color: var(--dark-text);
+  background:
+    radial-gradient(60% 80% at 88% 12%, color-mix(in srgb, #5c16ff 55%, transparent), transparent 70%),
+    radial-gradient(50% 70% at 5% 105%, color-mix(in srgb, #b9b9b9 22%, transparent), transparent 70%),
+    linear-gradient(135deg, #1b1233 0%, #0e0d13 60%);
+  border: 1px solid rgb(255 255 255 / 0.08);
+  box-shadow: 0 30px 80px -30px rgb(60 20 160 / 0.55);
+}
+.agencies-panel::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: linear-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+  background-size: 44px 44px;
+  -webkit-mask: radial-gradient(70% 90% at 80% 30%, #000, transparent);
+          mask: radial-gradient(70% 90% at 80% 30%, #000, transparent);
+  pointer-events: none;
+}
+.agencies-copy { position: relative; }
+.agencies-panel h2 { color: #fff; }
+@media (max-width: 900px) { .agencies-panel { grid-template-columns: 1fr; } }
+
+/* White-label illustration: your brand in front, our team behind */
+.wl-visual { position: relative; height: 340px; }
+.wl-card {
+  position: absolute;
+  width: min(300px, 80%);
+  padding: 1.4rem;
+  border-radius: 18px;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  display: flex; flex-direction: column; gap: .7rem;
+}
+.wl-card i { display: block; height: 8px; border-radius: 99px; background: rgb(255 255 255 / 0.14); }
+.wl-card i.short { width: 60%; }
+.wl-back {
+  top: 8%; right: 4%;
+  background: linear-gradient(160deg, rgb(92 22 255 / 0.55), rgb(92 22 255 / 0.15));
+  transform: rotate(7deg);
+}
+.wl-front {
+  bottom: 6%; left: 2%;
+  background: rgb(255 255 255 / 0.08);
+  -webkit-backdrop-filter: blur(14px);
+          backdrop-filter: blur(14px);
+  box-shadow: 0 24px 60px rgb(0 0 0 / 0.45);
+  transform: rotate(-4deg);
+}
+.wl-tag, .wl-logo { font: 700 .78rem/1 var(--font-head); letter-spacing: .14em; text-transform: uppercase; }
+.wl-tag { color: rgb(255 255 255 / 0.75); }
+.wl-logo { align-self: flex-start; padding: .45rem .7rem; border-radius: 8px; background: #fff; color: #16141f; }
+.wl-front i.wl-hero { height: 54px; border-radius: 10px; background: linear-gradient(120deg, rgb(185 185 185 / 0.35), rgb(154 123 255 / 0.55)); }
+.wl-check { display: inline-flex; align-items: center; gap: .4rem; align-self: flex-end; padding: .35rem .7rem; border-radius: 99px; background: rgb(154 123 255 / 0.22); color: #d9ceff; font: 600 .78rem/1 var(--font-body); }
+.wl-check svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+@media (max-width: 900px) { .wl-visual { height: 300px; max-width: 420px; } }
+@media (prefers-reduced-motion: no-preference) {
+  .wl-back { animation: zt-wl-float 7s ease-in-out infinite; }
+  .wl-front { animation: zt-wl-float 6s ease-in-out -2s infinite reverse; }
+  .wl-check { animation: zt-pulse 2.6s ease-in-out infinite; }
+}
+@keyframes zt-wl-float { 50% { translate: 0 -12px; } }
+
+.section-dark { background: transparent; }
 .section-dark .section-lead, .section-dark .checks li { color: var(--dark-muted); }
 .section-dark .eyebrow { color: var(--dark-accent); }
 .section-dark .checks li::before { background: var(--dark-accent-soft); }
 .section-dark .checks li::after { background: var(--dark-accent); }
 .section-dark .btn-primary { background: var(--dark-accent); color: var(--dark-accent-contrast); }
 .section-dark .btn-primary:hover { background: var(--dark-accent-strong); color: var(--dark-accent-contrast); }
-.agencies-inner > div { max-width: 720px; }
-.agencies-inner .checks { margin: 1.5rem 0 2rem; }
+.agencies-copy .checks { margin: 1.5rem 0 2rem; }
 
 /* ---------- FAQ ---------- */
 .faq { border-top: 1px solid var(--border); }

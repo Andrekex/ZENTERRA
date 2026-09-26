@@ -92,7 +92,9 @@
   function resize() {
     const w = window.innerWidth;
     const h = window.innerHeight;
-    dpr = Math.min(window.devicePixelRatio || 1, 1.75);
+    // Drawn at ~half resolution: the browser's smooth upscaling gives a soft blur for free
+    // (cheaper than a CSS blur filter, which would re-blur the whole screen every frame).
+    dpr = 0.55;
     canvas.width = Math.round(w * dpr);
     canvas.height = Math.round(h * dpr);
     canvas.style.width = `${w}px`;

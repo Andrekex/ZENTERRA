@@ -103,6 +103,9 @@ add_filter( 'pre_get_document_title', function ( $title ) {
 } );
 
 add_action( 'wp_head', function () {
+	// The site has its own Ukrainian version, so stop browsers from machine-translating
+	// the English page (Chrome in Ukrainian would otherwise show it in Ukrainian).
+	echo '<meta name="google" content="notranslate">' . "\n";
 	if ( ! zenterra_is_home_view() ) {
 		return;
 	}

@@ -271,5 +271,7 @@ return array(
 		'LLC ZENTERRA' => 'ТОВ «ЗЕНТЕРРА»',
 		'All rights reserved.' => 'Усі права захищено.',
 		'Back to top' => 'Нагору',
+		'Your brand' => 'Ваш бренд',
+		'Reviewed' => 'Перевірено',
 	),
 );
