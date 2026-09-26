@@ -1,7 +1,7 @@
 <footer class="site-footer">
 	<div class="container footer-inner">
 		<div>
-			<?php zenterra_logo(); ?>
+			<?php zenterra_logo( 'footer' ); ?>
 			<p class="muted small"><?php esc_html_e( 'Experienced developers, powered by AI.', 'zenterra' ); ?><br><?php esc_html_e( 'Working with clients in the US and EU.', 'zenterra' ); ?></p>
 			<p class="footer-contacts small">
 				<a href="mailto:<?php echo esc_attr( antispambot( zenterra_contact_email() ) ); ?>"><?php echo esc_html( antispambot( zenterra_contact_email() ) ); ?></a>

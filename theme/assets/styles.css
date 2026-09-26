@@ -203,9 +203,22 @@ a:hover { color: var(--accent-strong); }
 @media (max-width: 600px) { .admin-bar .site-header { top: 0; } }
 
 .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; height: 68px; }
-.logo { display: inline-flex; align-items: center; text-decoration: none; }
+.logo { display: inline-flex; align-items: center; gap: .55rem; text-decoration: none; }
+.logo-mark { display: block; height: 30px; width: auto; flex: none; overflow: visible; }
+.logo-mark .bar { transform-box: fill-box; transform-origin: center; }
+@media (prefers-reduced-motion: no-preference) {
+  /* The bars wave once on load and again on hover */
+  .site-header .logo-mark .bar { animation: zt-wave .9s cubic-bezier(.45, 0, .2, 1) both; }
+  .logo:hover .logo-mark .bar { animation: zt-wave-hover .9s cubic-bezier(.45, 0, .2, 1) both; }
+  .logo-mark .bar:nth-child(2) { animation-delay: .07s; }
+  .logo-mark .bar:nth-child(3) { animation-delay: .14s; }
+  .logo-mark .bar:nth-child(4) { animation-delay: .21s; }
+  .logo-mark .bar:nth-child(5) { animation-delay: .28s; }
+}
+@keyframes zt-wave { 0%, 100% { transform: scaleY(1); } 35% { transform: scaleY(.45); } 70% { transform: scaleY(1.12); } }
+@keyframes zt-wave-hover { 0%, 100% { transform: scaleY(1); } 35% { transform: scaleY(.45); } 70% { transform: scaleY(1.12); } }
 .logo-img { display: block; height: 44px; width: auto; }
-@media (max-width: 560px) { .logo-img { height: 38px; } }
+@media (max-width: 560px) { .logo-img { height: 38px; } .logo-mark { height: 26px; } .logo { gap: .45rem; } }
 .header-actions { display: flex; align-items: center; gap: .5rem; }
 
 /* EN | UA switch */
@@ -998,10 +1011,12 @@ main, .site-footer { position: relative; z-index: 1; }
 @keyframes zt-fade { from { opacity: 0; } to { opacity: 1; } }
 @keyframes zt-menu-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 
-/* Narrow phones (≤400px): fit logo, language switch and both buttons in the header */
-@media (max-width: 400px) {
+/* Narrow phones (≤440px): fit logo, language switch and both buttons in the header */
+@media (max-width: 440px) {
   .header-inner { gap: .5rem; }
   .logo-img { height: 30px; }
+  .logo-mark { height: 22px; }
+  .logo { gap: .35rem; }
   .header-actions { gap: .35rem; }
   .lang-switch > * { min-width: 32px; padding: 0 .3rem; }
 }
@@ -1009,7 +1024,8 @@ main, .site-footer { position: relative; z-index: 1; }
 /* Very narrow phones (<360px, e.g. first-gen iPhone SE) */
 @media (max-width: 359px) {
   .header-inner { padding: 0 16px; }
-  .logo-img { height: 26px; }
+  .logo-img { height: 24px; }
+  .logo-mark { height: 20px; }
   .header-actions { gap: .25rem; }
   .icon-btn { width: 42px; height: 42px; }
   .lang-switch > * { min-width: 30px; padding: 0 .25rem; }
