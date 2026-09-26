@@ -261,6 +261,8 @@ a:hover { color: var(--accent-strong); }
           mask: linear-gradient(90deg, transparent, #fff 12%, #fff 88%, transparent);
 }
 .marquee-track { display: flex; width: max-content; }
+.marquee-track + .marquee-track { margin-top: .7rem; }
+.marquee-track.reverse span { color: var(--accent); opacity: .8; }
 .marquee-track span {
   white-space: nowrap;
   margin-right: 3rem;
@@ -269,7 +271,7 @@ a:hover { color: var(--accent-strong); }
   letter-spacing: .14em;
   text-transform: uppercase;
 }
-.hero h1 { max-width: 16ch; }
+.hero h1 { max-width: 22ch; text-wrap: balance; }
 .lead { font-size: clamp(1.05rem, 1.8vw, 1.25rem); color: var(--muted); max-width: 60ch; }
 .hero-cta { display: flex; flex-wrap: wrap; gap: .75rem; margin: 2rem 0 3.5rem; }
 
@@ -287,7 +289,7 @@ a:hover { color: var(--accent-strong); }
 @media (max-width: 800px) { .stats { grid-template-columns: repeat(2, 1fr); } }
 
 /* ---------- Sections ---------- */
-.section { padding: clamp(4rem, 9vw, 6.5rem) 0; }
+.section { padding: clamp(4rem, 9vw, 6.5rem) 0; overflow-x: clip; }
 .section-alt { background: var(--bg-alt); }
 .section-head { max-width: 720px; margin-bottom: 2.75rem; }
 .section-lead { color: var(--muted); font-size: 1.1rem; }
@@ -349,6 +351,16 @@ a:hover { color: var(--accent-strong); }
   margin-bottom: 1.25rem;
 }
 .service:nth-child(2) .service-icon { background: var(--ai-soft); color: var(--ai); }
+
+/* Principles */
+.principles { margin-top: 3rem; }
+.principles-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+@media (max-width: 1000px) { .principles-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .principles-grid { grid-template-columns: 1fr; } }
+.principle { padding: 1.5rem; }
+.principle-n { display: block; margin-bottom: .9rem; font: 600 .85rem/1 var(--font-head); color: var(--accent); letter-spacing: .06em; }
+.principle h4 { margin: 0 0 .5rem; font: 600 1.05rem/1.3 var(--font-head); letter-spacing: -0.01em; }
+.principle p { margin: 0; color: var(--muted); font-size: .94rem; }
 
 /* Tech stack */
 .stack { margin-top: 3rem; }
@@ -552,6 +564,7 @@ a:hover { color: var(--accent-strong); }
   .hero h1 .w:nth-of-type(6) > span { animation-delay: .3s; }
   .hero h1 .w:nth-of-type(7) > span { animation-delay: .35s; }
   .hero h1 .w:nth-of-type(8) > span { animation-delay: .48s; }
+  .hero h1 .w.accent-w > span { animation-delay: .4s; }
   .hero-inner > .lead { animation-delay: .5s; }
   .hero-inner > .hero-cta { animation-delay: .6s; }
   .hero-inner > .stats { animation-delay: .6s; }
@@ -574,15 +587,43 @@ a:hover { color: var(--accent-strong); }
   .hero::before { animation: zt-drift 16s ease-in-out infinite alternate; }
   .hero-blob { animation: zt-drift 20s ease-in-out infinite alternate-reverse; }
 
-  /* Scroll reveal (classes added by main.js) */
-  .reveal { opacity: 0; transform: translateY(28px); filter: blur(6px); }
+  /* Scroll reveal (classes added by main.js). Replays on every pass. */
+  .reveal { opacity: 0; filter: blur(6px); }
+  .reveal[data-reveal="up"] { transform: translateY(36px); }
+  .reveal[data-reveal="left"] { transform: translateX(-56px); }
+  .reveal[data-reveal="right"] { transform: translateX(56px); }
+  .reveal[data-reveal="zoom"] { transform: translateY(24px) scale(.9); }
+  .reveal[data-reveal="pop"] { transform: scale(.6); }
+  .reveal[data-reveal="tilt"] { transform: perspective(900px) rotateX(24deg) translateY(40px); transform-origin: 50% 100%; }
   .reveal.is-visible {
     opacity: 1;
     transform: none;
     filter: blur(0);
-    transition: opacity .7s cubic-bezier(.2, .7, .2, 1), transform .7s cubic-bezier(.2, .7, .2, 1), filter .7s cubic-bezier(.2, .7, .2, 1);
+    transition: opacity .8s cubic-bezier(.16, 1, .3, 1), transform .9s cubic-bezier(.16, 1, .3, 1), filter .8s cubic-bezier(.16, 1, .3, 1);
     transition-delay: var(--delay, 0ms);
   }
+  .reveal[data-reveal="pop"].is-visible { transition-timing-function: ease, cubic-bezier(.34, 1.56, .64, 1), ease; }
+  /* After the entrance, hover effects respond instantly */
+  .reveal.is-visible.settled { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; transition-delay: 0s; }
+
+  /* Hero replays when you scroll back to it (class toggled by main.js) */
+  .hero.hero-reset .hero-inner > *,
+  .hero.hero-reset .stats > div,
+  .hero.hero-reset .marquee { animation: none; opacity: 0; }
+  .hero.hero-reset h1 { opacity: 1; }
+  .hero.hero-reset h1 .w > span { animation: none; transform: translateY(112%); }
+  .hero.hero-reset h1 .accent::after { animation: none; transform: scaleX(0); }
+
+  /* Always-on touches */
+  .service-icon { animation: zt-float 5s ease-in-out infinite; }
+  .service:nth-child(2) .service-icon { animation-delay: -1.6s; }
+  .service:nth-child(3) .service-icon { animation-delay: -3.2s; }
+  .cycle li::after { animation: zt-nudge 2.4s ease-in-out infinite; }
+  .cycle li:nth-child(2)::after { animation-delay: .4s; }
+  .cycle li:nth-child(3)::after { animation-delay: .8s; }
+  .cycle li:nth-child(4)::after { animation-delay: 1.2s; }
+  .cycle li:nth-child(5)::after { animation-delay: 1.6s; }
+  .marquee-track.reverse { animation-direction: reverse; animation-duration: 36s; }
 
   /* FAQ accordion (height animated by main.js) */
   .faq details.animating { overflow: hidden; }
@@ -599,8 +640,8 @@ a:hover { color: var(--accent-strong); }
   .step-n { transition: background-color .25s ease, color .25s ease, transform .25s ease; }
   .steps li:hover .step-n { background: var(--accent); color: var(--accent-contrast); transform: scale(1.1); }
 
-  .service-icon { transition: transform .35s cubic-bezier(.3, 1.6, .5, 1); }
-  .service:hover .service-icon { transform: rotate(-8deg) scale(1.08); }
+  .service-icon svg { transition: transform .35s cubic-bezier(.3, 1.6, .5, 1); }
+  .service:hover .service-icon svg { transform: rotate(-10deg) scale(1.15); }
 
   .btn { transition: background-color .15s, color .15s, border-color .15s, transform .2s ease, box-shadow .2s ease; }
   .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px color-mix(in srgb, var(--accent) 35%, transparent); }
@@ -640,6 +681,18 @@ a:hover { color: var(--accent-strong); }
   }
 }
 
+@property --zt-angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+@media (prefers-reduced-motion: no-preference) {
+  .price.featured {
+    border-color: transparent;
+    box-shadow: var(--shadow);
+    background:
+      linear-gradient(var(--surface), var(--surface)) padding-box,
+      conic-gradient(from var(--zt-angle), var(--accent), var(--brand-start), var(--accent-soft), var(--accent)) border-box;
+    animation: zt-spin 6s linear infinite;
+  }
+}
+
 @keyframes zt-rise { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
 @keyframes zt-underline { to { transform: scaleX(1); } }
 @keyframes zt-drift { from { transform: translate(0, 0) scale(1); } to { transform: translate(-8%, 6%) scale(1.15); } }
@@ -648,4 +701,7 @@ a:hover { color: var(--accent-strong); }
 @keyframes zt-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 @keyframes zt-word { from { transform: translateY(112%); } to { transform: none; } }
 @keyframes zt-marquee { to { transform: translateX(-50%); } }
+@keyframes zt-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes zt-nudge { 0%, 70%, 100% { transform: translate(0, -50%); opacity: .5; } 35% { transform: translate(4px, -50%); opacity: 1; color: var(--accent); } }
+@keyframes zt-spin { to { --zt-angle: 360deg; } }
 @keyframes zt-parallax { to { transform: translateY(-90px); } }

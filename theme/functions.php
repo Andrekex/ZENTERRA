@@ -48,10 +48,10 @@ add_action( 'wp_head', function () {
 
 	// Leave meta tags to an SEO plugin when one is active.
 	if ( is_front_page() && ! defined( 'WPSEO_VERSION' ) && ! class_exists( 'RankMath' ) ) {
-		$description = 'Zenterra is an AI-first studio. We build websites, apps and AI solutions with Claude — fast, at a fixed price, with every line of code reviewed by a team lead.';
+		$description = 'Zenterra is a team of experienced developers who use AI to work faster. We build websites, apps and AI solutions that solve real business problems, at a fixed price, with every line of code reviewed.';
 		printf( '<meta name="description" content="%s">' . "\n", esc_attr( $description ) );
-		printf( '<meta property="og:title" content="%s">' . "\n", esc_attr( 'Zenterra — Websites & AI solutions built with Claude' ) );
-		printf( '<meta property="og:description" content="%s">' . "\n", esc_attr( 'Fast, fixed-price websites and AI solutions. Every line reviewed.' ) );
+		printf( '<meta property="og:title" content="%s">' . "\n", esc_attr( 'Zenterra — Experienced developers, powered by AI' ) );
+		printf( '<meta property="og:description" content="%s">' . "\n", esc_attr( 'Websites, apps and AI solutions for real business problems. Fixed price, every line reviewed.' ) );
 		echo '<meta property="og:type" content="website">' . "\n";
 	}
 	echo '<meta name="theme-color" content="#5c16ff">' . "\n";

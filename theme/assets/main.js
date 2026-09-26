@@ -97,52 +97,91 @@ const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 8);
 onScroll();
 window.addEventListener('scroll', onScroll, { passive: true });
 
-// Fade elements in as they scroll into view, staggered within each group.
-// Only elements below the fold are hidden, so nothing visible flashes on load.
+// Reveal elements every time they scroll into view, with a direction per element type.
+// [selector, direction]; a list of directions is applied by position within the group.
 const REVEAL = [
-  '.section-head', '.table-wrap', '.callout', '.service', '.audiences h3', '.chips li', '.stack h3', '.stack-grid > div',
-  '.tabs', '.price', '.terms h3', '.terms-list li', '.steps li', '.cycle li',
-  '.quality-grid .card', '.agencies-inner > div > *', '.faq details',
-  '.contact-inner > div', '.contact-inner .form', '.entry',
-].join(',');
-
-function finishReveal(el) {
-  el.addEventListener('transitionend', function done(e) {
-    if (e.target !== el || e.propertyName !== 'transform') return;
-    el.classList.remove('reveal', 'is-visible');
-    el.style.removeProperty('--delay');
-    el.removeEventListener('transitionend', done);
-  });
-}
+  ['.section-head', 'left'],
+  ['.table-wrap', 'zoom'],
+  ['.callout', 'left'],
+  ['.principles h3', 'left'],
+  ['.principle', 'tilt'],
+  ['.service', ['left', 'up', 'right']],
+  ['.audiences h3', 'left'],
+  ['.chips li', 'pop'],
+  ['.stack h3', 'left'],
+  ['.stack-grid > div', 'tilt'],
+  ['.tabs', 'left'],
+  ['.price', 'zoom'],
+  ['.terms h3', 'left'],
+  ['.terms-list li', 'left'],
+  ['.steps li', 'left'],
+  ['.cycle li', 'left'],
+  ['.quality-grid .card', ['left', 'right']],
+  ['.agencies-inner > div > *', 'left'],
+  ['.faq details', 'right'],
+  ['.contact-inner > div', 'left'],
+  ['.contact-inner .form', 'right'],
+  ['.entry', 'up'],
+];
 
 function stagger(el) {
   const siblings = [...el.parentElement.children].filter((c) => c.classList.contains('reveal'));
-  el.style.setProperty('--delay', `${Math.min(siblings.indexOf(el), 6) * 70}ms`);
+  el.style.setProperty('--delay', `${Math.min(siblings.indexOf(el), 7) * 80}ms`);
 }
 
-// Replay the reveal on a group that was already shown (used by the pricing tabs)
+// Once the entrance finishes, switch to quick hover transitions (no delay).
+function settleAfterReveal(el) {
+  el.addEventListener('transitionend', (e) => {
+    if (e.target === el && e.propertyName === 'transform' && el.classList.contains('is-visible')) {
+      el.classList.add('settled');
+    }
+  });
+}
+
+// Replay the reveal on a group that is already on screen (used by the pricing tabs)
 function replayReveal(els) {
   if (reduceMotion.matches) return;
-  els.forEach((el) => { el.classList.remove('is-visible'); el.classList.add('reveal'); });
-  els.forEach(stagger);
+  els.forEach((el) => el.classList.remove('is-visible', 'settled'));
   void document.body.offsetWidth;
-  els.forEach((el) => { finishReveal(el); el.classList.add('is-visible'); });
+  els.forEach((el) => el.classList.add('is-visible'));
 }
 
 if (!reduceMotion.matches && 'IntersectionObserver' in window) {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      finishReveal(entry.target);
-      entry.target.classList.add('is-visible');
-      observer.unobserve(entry.target);
+  const items = [];
+  REVEAL.forEach(([selector, dir]) => {
+    document.querySelectorAll(selector).forEach((el, i) => {
+      el.dataset.reveal = Array.isArray(dir) ? dir[i % dir.length] : dir;
+      items.push(el);
     });
-  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.1 });
+  });
 
-  const items = [...document.querySelectorAll(REVEAL)]
-    .filter((el) => el.getBoundingClientRect().top > window.innerHeight);
-  items.forEach((el) => el.classList.add('reveal'));
-  items.forEach((el) => { stagger(el); observer.observe(el); });
+  // Show at 15% visible; reset only once fully off screen, so the reset is never seen.
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(({ target, isIntersecting, intersectionRatio }) => {
+      if (isIntersecting && intersectionRatio >= 0.15) {
+        target.classList.add('is-visible');
+      } else if (!isIntersecting) {
+        target.classList.remove('is-visible', 'settled');
+      }
+    });
+  }, { threshold: [0, 0.15] });
+
+  // Elements already on screen start visible, so nothing flashes on load.
+  items.forEach((el) => {
+    const r = el.getBoundingClientRect();
+    const onScreen = r.top < window.innerHeight && r.bottom > 0;
+    el.classList.add('reveal');
+    if (onScreen) el.classList.add('is-visible', 'settled');
+  });
+  items.forEach((el) => { stagger(el); settleAfterReveal(el); observer.observe(el); });
+
+  // Replay the hero entrance whenever you scroll back up to it.
+  const hero = document.querySelector('.hero');
+  if (hero) {
+    new IntersectionObserver(([entry]) => {
+      hero.classList.toggle('hero-reset', !entry.isIntersecting);
+    }).observe(hero);
+  }
 }
 
 // ---------- Spotlight border on cards (fine pointers) ----------

@@ -1,6 +1,6 @@
 # Zenterra WordPress theme
 
-One-page WordPress theme for Zenterra, an AI-first studio building websites and AI solutions with Claude. It is hosted on Hostiq's WordPress plan.
+One-page WordPress theme for Zenterra, a studio of experienced developers building websites, apps and AI solutions. It is hosted on Hostiq's WordPress plan.
 
 This repo holds only the theme. WordPress core, plugins, uploads and the database live on the server and are managed from wp-admin.
 
