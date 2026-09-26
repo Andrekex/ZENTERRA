@@ -62,10 +62,10 @@ get_header();
           <tr><th scope="col"></th><th scope="col"><?php esc_html_e( 'Typical agency', 'zenterra' ); ?></th><th scope="col"><?php esc_html_e( 'Freelancer', 'zenterra' ); ?></th><th scope="col" class="hl">Zenterra</th></tr>
         </thead>
         <tbody>
-          <tr><th scope="row"><?php esc_html_e( 'Website price', 'zenterra' ); ?></th><td><?php esc_html_e( 'from $1,500–3,500', 'zenterra' ); ?></td><td><?php esc_html_e( 'cheaper', 'zenterra' ); ?></td><td class="hl"><?php esc_html_e( '$1,500–4,000, fixed', 'zenterra' ); ?></td></tr>
-          <tr><th scope="row"><?php esc_html_e( 'Timeline', 'zenterra' ); ?></th><td><?php esc_html_e( 'weeks', 'zenterra' ); ?></td><td><?php esc_html_e( 'unpredictable', 'zenterra' ); ?></td><td class="hl"><?php esc_html_e( '1–2 weeks for a typical site', 'zenterra' ); ?></td></tr>
-          <tr><th scope="row"><?php esc_html_e( 'Team', 'zenterra' ); ?></th><td><?php esc_html_e( 'seniors + account manager', 'zenterra' ); ?></td><td><?php esc_html_e( 'one person', 'zenterra' ); ?></td><td class="hl"><?php esc_html_e( 'experienced developers, accelerated by AI', 'zenterra' ); ?></td></tr>
-          <tr><th scope="row"><?php esc_html_e( 'Quality control', 'zenterra' ); ?></th><td><?php esc_html_e( 'senior review', 'zenterra' ); ?></td><td><?php esc_html_e( 'none', 'zenterra' ); ?></td><td class="hl"><?php esc_html_e( 'every PR reviewed + launch checklist', 'zenterra' ); ?></td></tr>
+          <tr><th scope="row"><?php esc_html_e( 'Website price', 'zenterra' ); ?></th><td data-label="<?php esc_attr_e( 'Typical agency', 'zenterra' ); ?>"><?php esc_html_e( 'from $1,500–3,500', 'zenterra' ); ?></td><td data-label="<?php esc_attr_e( 'Freelancer', 'zenterra' ); ?>"><?php esc_html_e( 'cheaper', 'zenterra' ); ?></td><td class="hl" data-label="Zenterra"><?php esc_html_e( '$1,500–4,000, fixed', 'zenterra' ); ?></td></tr>
+          <tr><th scope="row"><?php esc_html_e( 'Timeline', 'zenterra' ); ?></th><td data-label="<?php esc_attr_e( 'Typical agency', 'zenterra' ); ?>"><?php esc_html_e( 'weeks', 'zenterra' ); ?></td><td data-label="<?php esc_attr_e( 'Freelancer', 'zenterra' ); ?>"><?php esc_html_e( 'unpredictable', 'zenterra' ); ?></td><td class="hl" data-label="Zenterra"><?php esc_html_e( '1–2 weeks for a typical site', 'zenterra' ); ?></td></tr>
+          <tr><th scope="row"><?php esc_html_e( 'Team', 'zenterra' ); ?></th><td data-label="<?php esc_attr_e( 'Typical agency', 'zenterra' ); ?>"><?php esc_html_e( 'seniors + account manager', 'zenterra' ); ?></td><td data-label="<?php esc_attr_e( 'Freelancer', 'zenterra' ); ?>"><?php esc_html_e( 'one person', 'zenterra' ); ?></td><td class="hl" data-label="Zenterra"><?php esc_html_e( 'experienced developers, accelerated by AI', 'zenterra' ); ?></td></tr>
+          <tr><th scope="row"><?php esc_html_e( 'Quality control', 'zenterra' ); ?></th><td data-label="<?php esc_attr_e( 'Typical agency', 'zenterra' ); ?>"><?php esc_html_e( 'senior review', 'zenterra' ); ?></td><td data-label="<?php esc_attr_e( 'Freelancer', 'zenterra' ); ?>"><?php esc_html_e( 'none', 'zenterra' ); ?></td><td class="hl" data-label="Zenterra"><?php esc_html_e( 'every PR reviewed + launch checklist', 'zenterra' ); ?></td></tr>
         </tbody>
       </table>
     </div>
@@ -75,7 +75,7 @@ get_header();
 
     <div class="principles">
       <h3 class="h-small"><?php esc_html_e( 'What we stand for', 'zenterra' ); ?></h3>
-      <div class="principles-grid">
+      <div class="principles-grid snap-row">
         <div class="card principle">
           <span class="principle-n">01</span>
           <h4><?php esc_html_e( 'Experience first, AI second', 'zenterra' ); ?></h4>
@@ -108,7 +108,7 @@ get_header();
       <p class="eyebrow"><?php esc_html_e( 'Services', 'zenterra' ); ?></p>
       <h2><?php esc_html_e( 'What we build', 'zenterra' ); ?></h2>
     </div>
-    <div class="grid-3">
+    <div class="grid-3 snap-row">
       <article class="card service">
         <div class="service-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01"/></svg>
@@ -155,7 +155,7 @@ get_header();
 
     <div class="stack">
       <h3 class="h-small"><?php esc_html_e( 'Our stack', 'zenterra' ); ?></h3>
-      <dl class="stack-grid">
+      <dl class="stack-grid snap-row">
         <div><dt><?php esc_html_e( 'Frontend', 'zenterra' ); ?></dt><dd>React</dd><dd>Next.js</dd><dd>Astro</dd><dd>TypeScript</dd><dd>JavaScript</dd><dd>HTML</dd><dd>CSS</dd></div>
         <div><dt><?php esc_html_e( 'Backend', 'zenterra' ); ?></dt><dd>Node.js</dd><dd>NestJS</dd><dd>PHP</dd><dd><?php esc_html_e( 'REST APIs', 'zenterra' ); ?></dd></div>
         <div><dt><?php esc_html_e( 'CMS & e‑commerce', 'zenterra' ); ?></dt><dd>WordPress</dd><dd>WooCommerce</dd><dd><?php esc_html_e( 'Custom WordPress plugins', 'zenterra' ); ?></dd><dd>Wix Studio</dd><dd>Webflow</dd></div>
@@ -189,7 +189,7 @@ get_header();
       <button role="tab" id="tab-ai" aria-selected="false" aria-controls="panel-ai" type="button" tabindex="-1"><?php esc_html_e( 'AI solutions', 'zenterra' ); ?></button>
     </div>
 
-    <div class="price-grid" id="panel-web" role="tabpanel" aria-labelledby="tab-web">
+    <div class="price-grid snap-row" id="panel-web" role="tabpanel" aria-labelledby="tab-web">
       <article class="card price">
         <h3><?php esc_html_e( 'Landing page', 'zenterra' ); ?></h3>
         <p class="price-tag">$800–1,500</p>
@@ -223,7 +223,7 @@ get_header();
       </article>
     </div>
 
-    <div class="price-grid" id="panel-ai" role="tabpanel" aria-labelledby="tab-ai" hidden>
+    <div class="price-grid snap-row" id="panel-ai" role="tabpanel" aria-labelledby="tab-ai" hidden>
       <article class="card price featured">
         <span class="badge"><?php esc_html_e( 'Start here', 'zenterra' ); ?></span>
         <h3><?php esc_html_e( 'AI audit', 'zenterra' ); ?></h3>
@@ -265,7 +265,7 @@ get_header();
       <p class="eyebrow"><?php esc_html_e( 'Process', 'zenterra' ); ?></p>
       <h2><?php esc_html_e( 'From first message to launch', 'zenterra' ); ?></h2>
     </div>
-    <ol class="steps">
+    <ol class="steps snap-row">
       <li><span class="step-n">1</span><div><h3><?php esc_html_e( 'Request', 'zenterra' ); ?></h3><p><?php esc_html_e( 'Reach out through the form, Upwork or LinkedIn.', 'zenterra' ); ?></p></div></li>
       <li><span class="step-n">2</span><div><h3><?php esc_html_e( 'Brief', 'zenterra' ); ?></h3><p><?php esc_html_e( 'One call or a short form: goals, pages, examples you like, content and access.', 'zenterra' ); ?></p></div></li>
       <li><span class="step-n">3</span><div><h3><?php esc_html_e( 'Proposal', 'zenterra' ); ?></h3><p><?php esc_html_e( 'Scope, timeline and fixed price within 24–48 hours.', 'zenterra' ); ?></p></div></li>
@@ -288,7 +288,7 @@ get_header();
       <h2><?php esc_html_e( 'AI does the work. People are accountable for it.', 'zenterra' ); ?></h2>
       <p class="section-lead"><?php esc_html_e( 'AI makes experienced developers faster. Our process makes that speed safe to rely on.', 'zenterra' ); ?></p>
     </div>
-    <ol class="cycle">
+    <ol class="cycle snap-row">
       <li><span class="who who-human"><?php esc_html_e( 'Human', 'zenterra' ); ?></span><h3><?php esc_html_e( 'Specification', 'zenterra' ); ?></h3><p><?php esc_html_e( 'Goal, acceptance criteria and what not to do. No spec, no code.', 'zenterra' ); ?></p></li>
       <li><span class="who who-human"><?php esc_html_e( 'Human', 'zenterra' ); ?></span><h3><?php esc_html_e( 'Context', 'zenterra' ); ?></h3><p><?php esc_html_e( 'Every repository has project conventions, commands and section templates.', 'zenterra' ); ?></p></li>
       <li><span class="who who-ai"><?php esc_html_e( 'AI', 'zenterra' ); ?></span><h3><?php esc_html_e( 'Implementation', 'zenterra' ); ?></h3><p><?php esc_html_e( 'Plan first, approved by the lead, then small changes.', 'zenterra' ); ?></p></li>
@@ -297,7 +297,7 @@ get_header();
       <li><span class="who who-human"><?php esc_html_e( 'Human', 'zenterra' ); ?></span><h3><?php esc_html_e( 'Demo', 'zenterra' ); ?></h3><p><?php esc_html_e( 'You see the result; lessons learned feed back into our playbook.', 'zenterra' ); ?></p></li>
     </ol>
 
-    <div class="grid-2 quality-grid">
+    <div class="grid-2 quality-grid snap-row">
       <div class="card">
         <h3><?php esc_html_e( 'Launch checklist', 'zenterra' ); ?></h3>
         <p class="muted"><?php esc_html_e( 'A site isn\'t done until every box is ticked.', 'zenterra' ); ?></p>

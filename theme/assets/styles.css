@@ -24,8 +24,8 @@
   --dark-accent-contrast: #0e0a1f;
   --shadow-rgb: 22 18 40;
   --shadow: 0 1px 2px rgb(22 18 40 / 0.04), 0 8px 24px rgb(22 18 40 / 0.06);
-  --radius: 14px;
-  --radius-sm: 8px;
+  --radius: 18px;
+  --radius-sm: 10px;
   --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-head: "Space Grotesk", var(--font-body);
   --container: 1120px;
@@ -81,7 +81,7 @@
 /* ---------- Base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
 [hidden] { display: none !important; }
-html { scroll-behavior: smooth; scroll-padding-top: 80px; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; -webkit-text-size-adjust: 100%; overflow-x: hidden; overflow-x: clip; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 body {
@@ -90,7 +90,6 @@ body {
   color: var(--text);
   font: 400 16px/1.6 var(--font-body);
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
 }
 
 h1, h2, h3 { font-family: var(--font-head); line-height: 1.15; margin: 0 0 .5em; letter-spacing: -0.02em; }
@@ -149,6 +148,7 @@ a:hover { color: var(--accent-strong); }
 /* ---------- Buttons ---------- */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  text-align: center;
   padding: .85rem 1.4rem;
   border-radius: 999px;
   font: 600 .98rem/1 var(--font-body);
@@ -186,10 +186,16 @@ a:hover { color: var(--accent-strong); }
 /* ---------- Header ---------- */
 .site-header {
   position: sticky; top: 0; z-index: 50;
-  background: color-mix(in srgb, var(--bg) 85%, transparent);
-  backdrop-filter: saturate(1.4) blur(12px);
-  -webkit-backdrop-filter: saturate(1.4) blur(12px);
   border-bottom: 1px solid var(--border);
+}
+/* Frosted background on a layer behind the header: a backdrop-filter on the header itself
+   would trap the fixed-position mobile menu inside the 68px-tall header. */
+.site-header::before {
+  content: "";
+  position: absolute; inset: 0; z-index: -1;
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  -webkit-backdrop-filter: saturate(1.4) blur(12px);
+          backdrop-filter: saturate(1.4) blur(12px);
 }
 /* Keep the sticky header below the WordPress admin bar */
 .admin-bar .site-header { top: 32px; }
@@ -217,19 +223,30 @@ html[lang|="uk"] { --font-head: "Manrope", var(--font-body); }
 .nav a:not(.btn):hover { color: var(--accent); }
 .menu-btn { display: none; }
 
+/* Mobile menu: a full-screen sheet with large links */
 @media (max-width: 900px) {
   .menu-btn { display: inline-grid; }
   .nav {
-    position: absolute; top: 68px; left: 0; right: 0;
+    position: fixed; top: 68px; left: 0; right: 0; bottom: 0;
     flex-direction: column; align-items: stretch; gap: 0;
-    padding: .5rem 16px 1rem;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
+    padding: 1.25rem 20px max(24px, env(safe-area-inset-bottom));
+    background: color-mix(in srgb, var(--bg) 94%, transparent);
+    -webkit-backdrop-filter: blur(18px);
+            backdrop-filter: blur(18px);
+    overflow-y: auto;
     display: none;
   }
   .nav.open { display: flex; }
-  .nav a:not(.btn) { padding: .85rem 0; border-bottom: 1px solid var(--border); }
-  .nav-cta { margin-top: 1rem; }
+  .nav a:not(.btn) {
+    display: flex; align-items: center; justify-content: space-between;
+    min-height: 60px;
+    border-bottom: 1px solid var(--border);
+    font: 600 1.6rem/1.2 var(--font-head); letter-spacing: -0.02em;
+  }
+  .nav a:not(.btn)::after { content: "→"; font-size: 1.2rem; color: var(--muted); transition: transform .2s, color .2s; }
+  .nav a:not(.btn):active::after { transform: translateX(4px); color: var(--accent); }
+  .nav-cta { margin-top: auto; min-height: 54px; font-size: 1.05rem; }
+  html.menu-open { overflow: hidden; }
 }
 
 /* ---------- Hero ---------- */
@@ -861,4 +878,138 @@ main, .site-footer { position: relative; z-index: 1; }
     pointer-events: none;
   }
   .tilt:hover::after { opacity: 1; }
+}
+
+/* ================= Phones ================= */
+.snap-dots { display: none; }
+@media (max-width: 700px) {
+  /* Rhythm and type */
+  .container { padding: 0 20px; }
+  .section { padding: 72px 0; }
+  .section-head { margin-bottom: 2rem; }
+  h1 { font-size: clamp(2.3rem, 10.5vw, 2.9rem); letter-spacing: -0.03em; }
+  h2 { font-size: clamp(1.85rem, 8vw, 2.2rem); letter-spacing: -0.025em; }
+  .lead, .section-lead { font-size: 1.05rem; }
+  .card { padding: 1.4rem; }
+  .hero { padding: 48px 0 40px; }
+  .hero-cta { flex-direction: column; margin: 1.75rem 0 2.5rem; }
+  /* The accent line wraps on phones: underline the text itself so it follows each line */
+  .hero h1 .accent-w, .hero h1 .accent { display: inline; }
+  .hero h1 .accent::after { display: none; }
+  .hero h1 .accent {
+    padding-bottom: 0;
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--accent) 75%, transparent);
+    text-decoration-thickness: .07em;
+    text-underline-offset: .16em;
+    -webkit-box-decoration-break: clone;
+            box-decoration-break: clone;
+  }
+  .hero-cta .btn { width: 100%; min-height: 54px; font-size: 1.02rem; }
+  .btn { min-height: 48px; }
+
+  /* Touch targets: at least 44px */
+  .icon-btn { width: 44px; height: 44px; }
+  .lang-switch > * { height: 36px; min-width: 38px; }
+  .tabs { display: flex; width: 100%; }
+  .tabs button { flex: 1; min-height: 44px; }
+  .footer-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1rem; }
+  .footer-nav a { display: flex; align-items: center; min-height: 44px; border-bottom: 1px solid var(--border); }
+  .footer-contacts a { display: flex; align-items: center; min-height: 40px; }
+  .faq summary { min-height: 60px; }
+
+  /* Card groups become swipeable rows with the next card peeking in */
+  .snap-row {
+    display: flex; grid-template-columns: none;
+    gap: 12px;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 20px;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin: 0 -20px;
+    padding: 16px 20px 22px;
+  }
+  .snap-row::-webkit-scrollbar { display: none; }
+  .snap-row > * { flex: 0 0 84%; scroll-snap-align: start; margin: 0; }
+  .price-grid.snap-row > *, .stack-grid.snap-row > * { flex-basis: 78%; }
+  .steps.snap-row > *, .cycle.snap-row > * { flex-basis: 72%; }
+  .snap-row[hidden] { display: none; }
+  .cycle.snap-row { margin-bottom: 1rem; }
+  .quality-grid.snap-row > * { flex-basis: 88%; }
+
+  /* Position dots under each row (added by main.js) */
+  .snap-dots { display: flex; justify-content: center; gap: 6px; margin-top: -4px; }
+  .snap-row[hidden] + .snap-dots { display: none; }
+  /* Cards in a swipe row animate as they come into view, without the vertical stagger */
+  .snap-row > .reveal { --delay: 0ms !important; }
+  .snap-dots i { width: 6px; height: 6px; border-radius: 99px; background: var(--border); transition: width .3s ease, background-color .3s ease; }
+  .snap-dots i.on { width: 20px; background: var(--accent); }
+
+  /* Comparison table becomes stacked cards: Zenterra first, the others side by side */
+  .table-wrap { overflow: visible; border: 0; background: none; box-shadow: none; }
+  .compare { min-width: 0; }
+  .compare, .compare tbody { display: block; }
+  .compare thead { display: none; }
+  .compare tr {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px 14px;
+    padding: 16px; margin-bottom: 12px;
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+  .compare th, .compare td { display: block; padding: 0; border: 0; width: auto; }
+  .compare tbody th { grid-column: 1 / -1; font: 600 .78rem/1.3 var(--font-body); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .compare td { font-size: .92rem; }
+  .compare td::before { content: attr(data-label); display: block; margin-bottom: 2px; font-size: .74rem; font-weight: 600; color: var(--muted); }
+  .compare td.hl { grid-column: 1 / -1; order: -1; padding: 12px 14px; border-radius: var(--radius-sm); background: var(--accent-soft); font-weight: 600; }
+  .compare tbody th { order: -2; }
+  .compare td.hl::before { color: var(--accent); }
+
+  /* Blocks */
+  .agencies-panel { padding: 28px 22px; border-radius: 24px; gap: 1.5rem; }
+  .wl-visual { height: 250px; }
+  .wl-card { width: 74%; padding: 1.1rem; }
+  .stats > div { padding: 1.1rem 1.15rem; }
+  .terms-list { gap: .75rem; }
+  .contact-points li { grid-template-columns: 5.5rem 1fr; }
+}
+
+/* Motion tuned for phones: shorter travel, lighter blur, press feedback */
+@media (max-width: 700px) and (prefers-reduced-motion: no-preference) {
+  .reveal { filter: blur(3px); }
+  .reveal[data-reveal="left"] { transform: translateX(-28px); }
+  .reveal[data-reveal="right"] { transform: translateX(28px); }
+  .reveal[data-reveal="up"] { transform: translateY(24px); }
+  .reveal[data-reveal="tilt"] { transform: perspective(700px) rotateX(16deg) translateY(24px); }
+  .hero h1 .w.accent-w > span { animation: zt-fade .8s ease .45s both; }
+  .nav.open a:not(.btn), .nav.open .nav-cta { animation: zt-menu-in .45s cubic-bezier(.16, 1, .3, 1) both; }
+  .nav.open a:nth-child(2) { animation-delay: .04s; }
+  .nav.open a:nth-child(3) { animation-delay: .08s; }
+  .nav.open a:nth-child(4) { animation-delay: .12s; }
+  .nav.open a:nth-child(5) { animation-delay: .16s; }
+  .nav.open a:nth-child(6) { animation-delay: .22s; }
+}
+@media (hover: none) and (prefers-reduced-motion: no-preference) {
+  .btn:active { transform: scale(.97); }
+  .card:not(.form):active, .steps li:active, .stack-grid > div:active { transform: scale(.985); transition: transform .15s ease; }
+}
+@keyframes zt-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes zt-menu-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+/* Narrow phones (≤400px): fit logo, language switch and both buttons in the header */
+@media (max-width: 400px) {
+  .header-inner { gap: .5rem; }
+  .logo-img { height: 30px; }
+  .header-actions { gap: .35rem; }
+  .lang-switch > * { min-width: 32px; padding: 0 .3rem; }
+}
+
+/* Very narrow phones (<360px, e.g. first-gen iPhone SE) */
+@media (max-width: 359px) {
+  .header-inner { padding: 0 16px; }
+  .logo-img { height: 26px; }
+  .header-actions { gap: .25rem; }
+  .icon-btn { width: 42px; height: 42px; }
+  .lang-switch > * { min-width: 30px; padding: 0 .25rem; }
 }

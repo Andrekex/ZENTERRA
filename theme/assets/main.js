@@ -17,12 +17,36 @@ const menuBtn = document.getElementById('menu-toggle');
 
 const setMenu = (open) => {
   nav.classList.toggle('open', open);
+  document.documentElement.classList.toggle('menu-open', open);
   menuBtn.setAttribute('aria-expanded', String(open));
   menuBtn.setAttribute('aria-label', open ? (I18N.closeMenu || 'Close menu') : (I18N.openMenu || 'Open menu'));
 };
 menuBtn.addEventListener('click', () => setMenu(!nav.classList.contains('open')));
 nav.addEventListener('click', (e) => { if (e.target.closest('a')) setMenu(false); });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+
+// ---------- Swipeable card rows on phones: position dots ----------
+document.querySelectorAll('.snap-row').forEach((row) => {
+  const items = [...row.children];
+  if (items.length < 2) return;
+  const dots = document.createElement('div');
+  dots.className = 'snap-dots';
+  dots.setAttribute('aria-hidden', 'true');
+  dots.innerHTML = items.map(() => '<i></i>').join('');
+  row.after(dots);
+  const marks = [...dots.children];
+  let queued = false;
+  const update = () => {
+    queued = false;
+    const step = (items[1].offsetLeft - items[0].offsetLeft) || 1;
+    const max = row.scrollWidth - row.clientWidth;
+    const i = row.scrollLeft >= max - 4 ? items.length - 1 : Math.round(row.scrollLeft / step);
+    marks.forEach((m, k) => m.classList.toggle('on', k === i));
+  };
+  row.addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+});
 
 // ---------- Pricing tabs ----------
 const tabs = [...document.querySelectorAll('[role="tab"]')];
