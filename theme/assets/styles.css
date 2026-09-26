@@ -977,11 +977,12 @@ main, .site-footer { position: relative; z-index: 1; }
 
 /* Motion tuned for phones: shorter travel, lighter blur, press feedback */
 @media (max-width: 700px) and (prefers-reduced-motion: no-preference) {
-  .reveal { filter: blur(3px); }
-  .reveal[data-reveal="left"] { transform: translateX(-28px); }
-  .reveal[data-reveal="right"] { transform: translateX(28px); }
-  .reveal[data-reveal="up"] { transform: translateY(24px); }
-  .reveal[data-reveal="tilt"] { transform: perspective(700px) rotateX(16deg) translateY(24px); }
+  /* Starting positions only (":not(.is-visible)"), so the final resting position still wins */
+  .reveal:not(.is-visible) { filter: blur(3px); }
+  .reveal[data-reveal="left"]:not(.is-visible) { transform: translateX(-28px); }
+  .reveal[data-reveal="right"]:not(.is-visible) { transform: translateX(28px); }
+  .reveal[data-reveal="up"]:not(.is-visible) { transform: translateY(24px); }
+  .reveal[data-reveal="tilt"]:not(.is-visible) { transform: perspective(700px) rotateX(16deg) translateY(24px); }
   .hero h1 .w.accent-w > span { animation: zt-fade .8s ease .45s both; }
   .nav.open a:not(.btn), .nav.open .nav-cta { animation: zt-menu-in .45s cubic-bezier(.16, 1, .3, 1) both; }
   .nav.open a:nth-child(2) { animation-delay: .04s; }
