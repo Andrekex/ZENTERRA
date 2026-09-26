@@ -102,6 +102,12 @@ add_filter( 'pre_get_document_title', function ( $title ) {
 	return $title;
 } );
 
+// Same signal for translation extensions that look for the "notranslate" class.
+add_filter( 'body_class', function ( $classes ) {
+	$classes[] = 'notranslate';
+	return $classes;
+} );
+
 add_action( 'wp_head', function () {
 	// The site has its own Ukrainian version, so stop browsers from machine-translating
 	// the English page (Chrome in Ukrainian would otherwise show it in Ukrainian).

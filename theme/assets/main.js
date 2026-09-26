@@ -150,12 +150,38 @@ function settleAfterReveal(el) {
   });
 }
 
+// Prices count up from zero when their card appears ("$800–1,500" → 0 … 800, 0 … 1,500)
+function countUp(card) {
+  const tag = card.querySelector('.price-tag');
+  const node = tag && tag.firstChild;
+  if (!node || node.nodeType !== Node.TEXT_NODE) return;
+  const original = tag.dataset.price || (tag.dataset.price = node.nodeValue);
+  const targets = (original.match(/\d[\d,]*/g) || []).map((n) => Number(n.replace(/,/g, '')));
+  if (!targets.length) return;
+  const delay = parseInt(card.style.getPropertyValue('--delay'), 10) || 0;
+  const start = performance.now() + delay + 150;
+  const duration = 1000;
+  const step = (now) => {
+    const p = Math.max(0, Math.min(1, (now - start) / duration));
+    const eased = 1 - Math.pow(1 - p, 3);
+    let i = 0;
+    node.nodeValue = original.replace(/\d[\d,]*/g, () => Math.round(targets[i++] * eased).toLocaleString('en-US'));
+    if (p < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+// Called whenever a revealed element comes into view
+function onShown(el) {
+  if (el.classList.contains('price')) countUp(el);
+}
+
 // Replay the reveal on a group that is already on screen (used by the pricing tabs)
 function replayReveal(els) {
   if (reduceMotion.matches) return;
   els.forEach((el) => el.classList.remove('is-visible', 'settled'));
   void document.body.offsetWidth;
-  els.forEach((el) => el.classList.add('is-visible'));
+  els.forEach((el) => { el.classList.add('is-visible'); onShown(el); });
 }
 
 if (!reduceMotion.matches && 'IntersectionObserver' in window) {
@@ -171,12 +197,18 @@ if (!reduceMotion.matches && 'IntersectionObserver' in window) {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(({ target, isIntersecting, intersectionRatio }) => {
       if (isIntersecting && intersectionRatio >= 0.15) {
+        if (!target.classList.contains('is-visible')) onShown(target);
         target.classList.add('is-visible');
       } else if (!isIntersecting) {
         target.classList.remove('is-visible', 'settled');
       }
     });
   }, { threshold: [0, 0.15] });
+
+  // Index the contents of cards so they can cascade in after the card lands.
+  document.querySelectorAll('.service .checks, .quality-grid .checks, .stack-grid > div, .principle, .price, .compare tbody').forEach((group) => {
+    [...group.children].forEach((child, i) => child.style.setProperty('--i', i));
+  });
 
   // Elements already on screen start visible, so nothing flashes on load.
   items.forEach((el) => {
@@ -222,7 +254,7 @@ if (bg && !reduceMotion.matches) {
 
 // ---------- Spotlight border on cards (fine pointers) ----------
 if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-  document.querySelectorAll('.card, .steps li, .cycle li, .stack-grid > div').forEach((el) => {
+  document.querySelectorAll('.card:not(.form), .steps li, .cycle li, .stack-grid > div').forEach((el) => {
     el.classList.add('spot');
     el.addEventListener('pointermove', (e) => {
       const r = el.getBoundingClientRect();
@@ -241,6 +273,22 @@ if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
         btn.style.transform = `translate(${x * 0.15}px, ${y * 0.3 - 2}px)`;
       });
       btn.addEventListener('pointerleave', () => { btn.style.transform = ''; });
+    });
+
+    // ---------- 3D tilt toward the cursor (cards only, not the form) ----------
+    document.querySelectorAll('.service, .price, .principle, .quality-grid .card, .stack-grid > div, .steps li').forEach((el) => {
+      el.classList.add('tilt');
+      el.addEventListener('pointermove', (e) => {
+        const r = el.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        el.style.setProperty('--rx', `${(-y * 8).toFixed(2)}deg`);
+        el.style.setProperty('--ry', `${(x * 10).toFixed(2)}deg`);
+      });
+      el.addEventListener('pointerleave', () => {
+        el.style.setProperty('--rx', '0deg');
+        el.style.setProperty('--ry', '0deg');
+      });
     });
   }
 }
