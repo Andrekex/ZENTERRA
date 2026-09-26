@@ -194,7 +194,17 @@ a:hover { color: var(--accent-strong); }
 .logo { display: inline-flex; align-items: center; text-decoration: none; }
 .logo-img { display: block; height: 44px; width: auto; }
 @media (max-width: 560px) { .logo-img { height: 38px; } }
-.header-actions { display: flex; gap: .5rem; }
+.header-actions { display: flex; align-items: center; gap: .5rem; }
+
+/* EN | UA switch */
+.lang-switch { display: inline-flex; padding: 3px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); }
+.lang-switch > * { display: grid; place-items: center; min-width: 34px; height: 32px; padding: 0 .45rem; border-radius: 7px; font: 600 .78rem/1 var(--font-body); letter-spacing: .06em; text-decoration: none; }
+.lang-switch a { color: var(--muted); transition: color .2s, background-color .2s; }
+.lang-switch a:hover { color: var(--text); background: var(--bg-alt); }
+.lang-switch .is-current { background: var(--accent); color: var(--accent-contrast); }
+
+/* Ukrainian: Space Grotesk has no Cyrillic, so headings use Manrope */
+html[lang|="uk"] { --font-head: "Manrope", var(--font-body); }
 
 .nav { display: flex; align-items: center; gap: 1.6rem; }
 .nav a:not(.btn) { color: var(--text); text-decoration: none; font-weight: 500; font-size: .95rem; }
@@ -222,32 +232,9 @@ a:hover { color: var(--accent-strong); }
   padding: clamp(4rem, 10vw, 7.5rem) 0 clamp(3rem, 7vw, 5rem);
   overflow: hidden;
 }
-.hero::before {
-  content: "";
-  position: absolute; inset: -40% -10% auto auto;
-  width: 70vw; height: 70vw; max-width: 900px; max-height: 900px;
-  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 18%, transparent), transparent 65%);
-  pointer-events: none;
-}
 .hero-inner { position: relative; }
 .hero h1 .w { display: inline-block; overflow: hidden; vertical-align: bottom; }
 .hero h1 .w > span { display: inline-block; }
-
-/* Second background blob + grain texture */
-.hero-blob {
-  position: absolute; left: -12%; bottom: -30%;
-  width: 55vw; height: 55vw; max-width: 720px; max-height: 720px;
-  border-radius: 50%;
-  background: radial-gradient(circle, color-mix(in srgb, var(--brand-start) 22%, transparent), transparent 65%);
-  pointer-events: none;
-}
-.hero::after {
-  content: "";
-  position: absolute; inset: 0;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
-  opacity: var(--grain, 0.05);
-  pointer-events: none;
-}
 
 /* Platforms marquee */
 .marquee {
@@ -290,7 +277,42 @@ a:hover { color: var(--accent-strong); }
 
 /* ---------- Sections ---------- */
 .section { padding: clamp(4rem, 9vw, 6.5rem) 0; overflow-x: clip; }
-.section-alt { background: var(--bg-alt); }
+.section-alt { background: color-mix(in srgb, var(--bg-alt) 60%, transparent); }
+
+/* ---------- Page background: orbs, dot grid and grain behind all content ----------
+   --s (scroll progress 0–1), --gy (grid offset) and --px/--py (pointer, -1–1) are set by main.js. */
+main, .site-footer { position: relative; z-index: 1; }
+.zt-bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.zt-orb {
+  position: absolute; border-radius: 50%;
+  will-change: transform;
+  opacity: calc(.8 + var(--v, 0) * .5);
+  transition: transform .7s cubic-bezier(.2, .7, .2, 1), opacity .5s ease;
+}
+/* Elliptical glows that travel, grow and rotate as you scroll */
+.zt-orb-1 {
+  width: 88vmax; height: 58vmax; left: 45%; top: -30vmax;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 30%, transparent), transparent);
+  transform: translate3d(calc(var(--s, 0) * -70vw + var(--px, 0) * 3vw), calc(var(--s, 0) * 95vh + var(--py, 0) * 3vh), 0) rotate(calc(var(--s, 0) * 220deg)) scale(calc(1 + var(--s, 0) * .4));
+}
+.zt-orb-2 {
+  width: 70vmax; height: 46vmax; left: -30vmax; top: 25%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--brand-start) 36%, transparent), transparent);
+  transform: translate3d(calc(var(--s, 0) * 85vw - var(--px, 0) * 4vw), calc(var(--s, 0) * -45vh - var(--py, 0) * 4vh), 0) rotate(calc(var(--s, 0) * -180deg)) scale(calc(1.15 - var(--s, 0) * .3));
+}
+.zt-orb-3 {
+  width: 60vmax; height: 38vmax; left: 25%; top: 80%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 20%, transparent), transparent);
+  transform: translate3d(calc(var(--s, 0) * -30vw + var(--px, 0) * 5vw), calc(var(--s, 0) * -115vh + var(--py, 0) * 5vh), 0) rotate(calc(var(--s, 0) * 140deg));
+}
+/* Code lines and review scanner, drawn by bg.js */
+.zt-code { position: absolute; inset: 0; width: 100%; height: 100%; }
+.zt-bg::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: var(--grain, 0.05);
+}
 .section-head { max-width: 720px; margin-bottom: 2.75rem; }
 .section-lead { color: var(--muted); font-size: 1.1rem; }
 
@@ -511,6 +533,38 @@ a:hover { color: var(--accent-strong); }
 .footer-nav a { color: var(--muted); text-decoration: none; font-size: .95rem; }
 .footer-nav a:hover { color: var(--text); }
 .copyright { text-align: right; margin: 0; }
+.footer-contacts { display: flex; flex-direction: column; gap: .35rem; margin: .9rem 0 0; }
+.footer-contacts a { color: var(--text); text-decoration: none; font-weight: 500; }
+.footer-contacts a:hover { color: var(--accent); }
+
+/* Back to top, with a ring that fills as you scroll (--p set by main.js) */
+.to-top {
+  position: fixed; right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom));
+  z-index: 40;
+  width: 52px; height: 52px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--surface); color: var(--accent);
+  box-shadow: 0 6px 24px rgb(var(--shadow-rgb) / 0.18);
+  opacity: 0; visibility: hidden; transform: translateY(16px) scale(.9);
+  transition: opacity .3s ease, transform .3s ease, visibility 0s linear .3s, background-color .2s, color .2s;
+}
+.to-top.is-shown {
+  opacity: 1; visibility: visible; transform: none;
+  transition: opacity .3s ease, transform .4s cubic-bezier(.34, 1.56, .64, 1), background-color .2s, color .2s;
+}
+.to-top:hover { background: var(--accent); color: var(--accent-contrast); }
+.to-top > svg { grid-area: 1 / 1; }
+.to-top-ring {
+  width: 52px; height: 52px; transform: rotate(-90deg);
+  fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round;
+  stroke-dasharray: 100; stroke-dashoffset: calc(100 - var(--p, 0) * 100);
+}
+.to-top:hover .to-top-ring { stroke: var(--accent-contrast); }
+.to-top-arrow { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+@media (prefers-reduced-motion: no-preference) {
+  .to-top:hover .to-top-arrow { animation: zt-bob .8s ease-in-out infinite; }
+}
+@keyframes zt-bob { 50% { transform: translateY(-3px); } }
 @media (max-width: 800px) {
   .footer-inner { grid-template-columns: 1fr; }
   .copyright { text-align: left; }
@@ -584,8 +638,10 @@ a:hover { color: var(--accent-strong); }
   }
 
   /* Slow drifting glow behind the hero */
-  .hero::before { animation: zt-drift 16s ease-in-out infinite alternate; }
-  .hero-blob { animation: zt-drift 20s ease-in-out infinite alternate-reverse; }
+  /* Orbs keep drifting and breathing when you stop scrolling ("translate"/"scale" compose with the scroll transform) */
+  .zt-orb-1 { animation: zt-orb-drift 11s ease-in-out infinite alternate; }
+  .zt-orb-2 { animation: zt-orb-drift 14s ease-in-out -4s infinite alternate-reverse; }
+  .zt-orb-3 { animation: zt-orb-drift 17s ease-in-out -9s infinite alternate; }
 
   /* Scroll reveal (classes added by main.js). Replays on every pass. */
   .reveal { opacity: 0; filter: blur(6px); }
@@ -659,16 +715,6 @@ a:hover { color: var(--accent-strong); }
 /* Thin progress bar under the header, driven by scroll position */
 @supports (animation-timeline: scroll()) {
   @media (prefers-reduced-motion: no-preference) {
-    .hero-blob {
-      animation: zt-parallax linear both;
-      animation-timeline: scroll(root);
-      animation-range: 0 120vh;
-    }
-  }
-}
-
-@supports (animation-timeline: scroll()) {
-  @media (prefers-reduced-motion: no-preference) {
     .site-header::after {
       content: "";
       position: absolute; left: 0; right: 0; bottom: -1px;
@@ -695,7 +741,7 @@ a:hover { color: var(--accent-strong); }
 
 @keyframes zt-rise { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
 @keyframes zt-underline { to { transform: scaleX(1); } }
-@keyframes zt-drift { from { transform: translate(0, 0) scale(1); } to { transform: translate(-8%, 6%) scale(1.15); } }
+@keyframes zt-orb-drift { 0% { translate: 0 0; scale: 1; } 50% { translate: 8vw -6vh; scale: 1.12; } 100% { translate: -5vw 7vh; scale: .94; } }
 @keyframes zt-pulse { 0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 45%, transparent); } 50% { box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 0%, transparent); } }
 @keyframes zt-drop { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
 @keyframes zt-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
@@ -704,4 +750,3 @@ a:hover { color: var(--accent-strong); }
 @keyframes zt-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
 @keyframes zt-nudge { 0%, 70%, 100% { transform: translate(0, -50%); opacity: .5; } 35% { transform: translate(4px, -50%); opacity: 1; color: var(--accent); } }
 @keyframes zt-spin { to { --zt-angle: 360deg; } }
-@keyframes zt-parallax { to { transform: translateY(-90px); } }

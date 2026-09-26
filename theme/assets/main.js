@@ -1,3 +1,5 @@
+const I18N = window.ZT_I18N || {};
+
 // ---------- Theme toggle ----------
 const root = document.documentElement;
 const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
@@ -16,7 +18,7 @@ const menuBtn = document.getElementById('menu-toggle');
 const setMenu = (open) => {
   nav.classList.toggle('open', open);
   menuBtn.setAttribute('aria-expanded', String(open));
-  menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  menuBtn.setAttribute('aria-label', open ? (I18N.closeMenu || 'Close menu') : (I18N.openMenu || 'Open menu'));
 };
 menuBtn.addEventListener('click', () => setMenu(!nav.classList.contains('open')));
 nav.addEventListener('click', (e) => { if (e.target.closest('a')) setMenu(false); });
@@ -77,14 +79,14 @@ function initContactForm(form) {
 
     if (firstInvalid) {
       e.preventDefault();
-      note.textContent = 'Please fill in your name, a valid email and your goal.';
+      note.textContent = I18N.invalid || 'Please fill in your name, a valid email and your goal.';
       note.className = 'form-note small error';
       firstInvalid.focus();
       return;
     }
 
     btn.disabled = true;
-    btn.textContent = 'Sending…';
+    btn.textContent = I18N.sending || 'Sending…';
   });
 }
 
@@ -93,7 +95,16 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 // Header shadow once the page is scrolled
 const header = document.querySelector('.site-header');
-const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 8);
+const toTop = document.getElementById('to-top');
+const onScroll = () => {
+  const y = window.scrollY;
+  header.classList.toggle('scrolled', y > 8);
+  if (toTop) {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    toTop.classList.toggle('is-shown', y > window.innerHeight * 0.6);
+    toTop.style.setProperty('--p', max > 0 ? Math.min(1, y / max).toFixed(3) : 0);
+  }
+};
 onScroll();
 window.addEventListener('scroll', onScroll, { passive: true });
 
@@ -181,6 +192,30 @@ if (!reduceMotion.matches && 'IntersectionObserver' in window) {
     new IntersectionObserver(([entry]) => {
       hero.classList.toggle('hero-reset', !entry.isIntersecting);
     }).observe(hero);
+  }
+}
+
+// ---------- Page background follows scroll (and the pointer on desktop) ----------
+const bg = document.getElementById('zt-bg');
+if (bg && !reduceMotion.matches) {
+  let queued = false;
+  const paint = () => {
+    queued = false;
+    const y = window.scrollY;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    bg.style.setProperty('--s', (max > 0 ? Math.min(1, y / max) : 0).toFixed(4));
+    bg.style.setProperty('--gy', ((y * 0.3) % 28).toFixed(2));
+  };
+  const queue = () => { if (!queued) { queued = true; requestAnimationFrame(paint); } };
+  window.addEventListener('scroll', queue, { passive: true });
+  window.addEventListener('resize', queue);
+  paint();
+
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    window.addEventListener('pointermove', (e) => {
+      bg.style.setProperty('--px', ((e.clientX / window.innerWidth) * 2 - 1).toFixed(3));
+      bg.style.setProperty('--py', ((e.clientY / window.innerHeight) * 2 - 1).toFixed(3));
+    }, { passive: true });
   }
 }
 

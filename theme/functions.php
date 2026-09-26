@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 define( 'ZENTERRA_VERSION', wp_get_theme()->get( 'Version' ) );
 
+require get_template_directory() . '/inc/i18n.php';
 require get_template_directory() . '/inc/contact.php';
 
 add_action( 'after_setup_theme', function () {
@@ -27,6 +28,7 @@ add_action( 'wp_enqueue_scripts', function () {
 	);
 	wp_enqueue_style( 'zenterra', $uri . '/assets/styles.css', array( 'zenterra-fonts' ), ZENTERRA_VERSION );
 	wp_enqueue_script( 'zenterra', $uri . '/assets/main.js', array(), ZENTERRA_VERSION, array( 'strategy' => 'defer', 'in_footer' => true ) );
+	wp_enqueue_script( 'zenterra-bg', $uri . '/assets/bg.js', array(), ZENTERRA_VERSION, array( 'strategy' => 'defer', 'in_footer' => true ) );
 } );
 
 add_filter( 'wp_resource_hints', function ( $urls, $relation ) {
@@ -47,11 +49,11 @@ add_action( 'wp_head', function () {
 	}
 
 	// Leave meta tags to an SEO plugin when one is active.
-	if ( is_front_page() && ! defined( 'WPSEO_VERSION' ) && ! class_exists( 'RankMath' ) ) {
-		$description = 'Zenterra is a team of experienced developers who use AI to work faster. We build websites, apps and AI solutions that solve real business problems, at a fixed price, with every line of code reviewed.';
+	if ( zenterra_is_home_view() && ! defined( 'WPSEO_VERSION' ) && ! class_exists( 'RankMath' ) ) {
+		$description = __( 'Zenterra is a team of experienced developers who use AI to work faster. We build websites, apps and AI solutions that solve real business problems, at a fixed price, with every line of code reviewed.', 'zenterra' );
 		printf( '<meta name="description" content="%s">' . "\n", esc_attr( $description ) );
-		printf( '<meta property="og:title" content="%s">' . "\n", esc_attr( 'Zenterra — Experienced developers, powered by AI' ) );
-		printf( '<meta property="og:description" content="%s">' . "\n", esc_attr( 'Websites, apps and AI solutions for real business problems. Fixed price, every line reviewed.' ) );
+		printf( '<meta property="og:title" content="%s">' . "\n", esc_attr__( 'Zenterra — Experienced developers, powered by AI', 'zenterra' ) );
+		printf( '<meta property="og:description" content="%s">' . "\n", esc_attr__( 'Websites, apps and AI solutions for real business problems. Fixed price, every line reviewed.', 'zenterra' ) );
 		echo '<meta property="og:type" content="website">' . "\n";
 	}
 	echo '<meta name="theme-color" content="#5c16ff">' . "\n";
@@ -61,7 +63,7 @@ add_action( 'wp_head', function () {
  * Link to a section of the one-page layout, from any page.
  */
 function zenterra_section_url( $id ) {
-	return is_front_page() ? '#' . $id : home_url( '/#' . $id );
+	return zenterra_is_home_view() ? '#' . $id : home_url( '/#' . $id );
 }
 
 /**
@@ -69,7 +71,7 @@ function zenterra_section_url( $id ) {
  */
 function zenterra_logo() {
 	?>
-	<a href="<?php echo esc_url( is_front_page() ? '#top' : home_url( '/' ) ); ?>" class="logo">
+	<a href="<?php echo esc_url( zenterra_is_home_view() ? '#top' : zenterra_lang_url( zenterra_lang() ) ); ?>" class="logo">
 		<img class="logo-img" src="<?php echo esc_url( get_template_directory_uri() . '/assets/logo.svg' ); ?>" alt="Zenterra" width="120" height="28">
 	</a>
 	<?php

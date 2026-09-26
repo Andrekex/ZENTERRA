@@ -27,6 +27,7 @@ function zenterra_contact_budgets() {
 }
 
 define( 'ZENTERRA_DEFAULT_EMAIL', 'administration@zenterrait.com' );
+define( 'ZENTERRA_TELEGRAM', 'zenterrait' );
 
 /**
  * Where requests are sent, also shown on the page.
