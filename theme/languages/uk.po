@@ -66,10 +66,7 @@ msgid "We're professional developers with many years of experience behind us. AI
 msgstr "Ми — професійні розробники з багаторічним досвідом. ШІ робить нас швидшими, але саме досвід вирішує вашу бізнес-задачу. Фіксована ціна, чесні оцінки, і кожну зміну перевіряє досвідчений розробник, перш ніж вона потрапить до вас."
 
 msgid "Get a proposal in 48 hours"
-msgstr "Отримати пропозицію за 48 годин"
-
-msgid "See pricing"
-msgstr "Переглянути ціни"
+msgstr "Отримати пропозицію за 48 годин"
 
 msgid "1–2 weeks"
 msgstr "1–2 тижні"
@@ -144,13 +141,13 @@ msgid "Website price"
 msgstr "Ціна сайту"
 
 msgid "from $1,500–3,500"
-msgstr "від $1,500–3,500"
+msgstr "від 20 000–45 000 грн"
 
 msgid "cheaper"
 msgstr "дешевше"
 
 msgid "$1,500–4,000, fixed"
-msgstr "$1,500–4,000, фіксовано"
+msgstr "від 12 000 грн, фіксовано"
 
 msgid "Timeline"
 msgstr "Строк"
@@ -279,7 +276,7 @@ msgid "MVPs with AI features built in"
 msgstr "MVP з вбудованими ШІ-функціями"
 
 msgid "Projects typically from $3,000, quoted after a short scoping call"
-msgstr "Проєкти зазвичай від $3,000, ціну називаємо після короткого дзвінка"
+msgstr "Проєкти зазвичай від 40 000 грн, ціну називаємо після короткого дзвінка"
 
 msgid "Our stack"
 msgstr "Наш стек"
@@ -419,12 +416,6 @@ msgstr "Результат належить вам."
 msgid "All rights to the work transfer to you once it's paid for."
 msgstr "Усі права на роботу переходять до вас після оплати."
 
-msgid "Consultations"
-msgstr "Консультації"
-
-msgid "are available by the hour, from $30–40/hour."
-msgstr "доступні погодинно, від $30–40 за годину."
-
 msgid "From first message to launch"
 msgstr "Від першого повідомлення до запуску"
 
@@ -486,7 +477,7 @@ msgid "Support"
 msgstr "Підтримка"
 
 msgid "Optional monthly care from $100/month."
-msgstr "За бажанням — щомісячний супровід від $100/міс."
+msgstr "За бажанням — щомісячний супровід від 2 500 грн/міс."
 
 msgid "How we build"
 msgstr "Як ми працюємо"
@@ -654,7 +645,7 @@ msgid "How do I pay?"
 msgstr "Як оплатити?"
 
 msgid "We invoice in USD. Websites are 50% upfront and 50% at launch. Larger projects are paid by milestone. Payment is by international bank transfer (SWIFT), or through Upwork if we're working there."
-msgstr "Рахунки виставляємо в доларах США. Сайти — 50% наперед і 50% після запуску. Більші проєкти оплачуються поетапно. Оплата — міжнародним банківським переказом (SWIFT) або через Upwork, якщо ми співпрацюємо там."
+msgstr "Для клієнтів з України рахунки виставляємо в гривнях, для іноземних — у доларах США. Сайти — 50% наперед і 50% після запуску. Більші проєкти оплачуються поетапно. Оплата — банківським переказом на рахунок компанії; для іноземних клієнтів — також SWIFT або Upwork."
 
 msgid "Do you work with clients outside the US?"
 msgstr "Чи працюєте ви з клієнтами з України?"
@@ -811,3 +802,33 @@ msgstr "Ваш бренд"
 
 msgid "Reviewed"
 msgstr "Перевірено"
+
+msgid "Privacy Policy"
+msgstr "Політика конфіденційності"
+
+msgid "our Privacy Policy"
+msgstr "Політикою конфіденційності"
+
+msgid "By sending this form, you agree to %s. We reply within 24–48 hours."
+msgstr "Надсилаючи форму, ви погоджуєтеся з %s. Відповідаємо протягом 24–48 годин."
+
+msgid "Zenterra IT — AI-Powered Web Development, Fixed Price"
+msgstr "Zenterra IT — сайти та AI-рішення за фіксованою ціною"
+
+msgid "Zenterra IT — Experienced developers, powered by AI"
+msgstr "Zenterra IT — досвідчені розробники, підсилені ШІ"
+
+msgid "Experienced developers + AI: company websites in 1–2 weeks, AI chatbots and automations. Fixed price upfront, every line of code reviewed by a human."
+msgstr "Досвідчені розробники + ШІ: сайт компанії за 1–2 тижні, AI-чат-боти й автоматизація. Фіксована ціна наперед, кожен рядок коду перевіряє людина."
+
+msgid "Websites, AI solutions and MVPs for small businesses, startups and agencies. Fixed price, every line reviewed."
+msgstr "Сайти, AI-рішення та MVP для бізнесу, стартапів і агенцій. Фіксована ціна, кожен рядок перевірено."
+
+msgid "How Zenterra IT collects, uses and protects your personal data."
+msgstr "Як Zenterra IT збирає, використовує та захищає ваші персональні дані."
+
+msgid "Book a free 30-min call"
+msgstr "Безкоштовний дзвінок на 30 хв"
+
+msgid "Prefer to talk first? Pick a time that suits you."
+msgstr "Хочете спершу поговорити? Оберіть зручний час."

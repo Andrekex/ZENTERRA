@@ -174,13 +174,19 @@ function settleAfterReveal(el) {
   });
 }
 
-// Prices count up from zero when their card appears ("$800–1,500" → 0 … 800, 0 … 1,500)
+// Prices count up from zero when their card appears ("$800–1,500" → 0 … 800, 0 … 1,500;
+// "від 12 000 грн" keeps its space-grouped format)
+const NUMBER = /\d{1,3}(?:[,\u00a0 ]\d{3})+|\d+/g;
+const groupDigits = (n, sep) => (sep ? String(n).replace(/\B(?=(\d{3})+(?!\d))/g, sep) : String(n));
+
 function countUp(card) {
   const tag = card.querySelector('.price-tag');
   const node = tag && tag.firstChild;
   if (!node || node.nodeType !== Node.TEXT_NODE) return;
   const original = tag.dataset.price || (tag.dataset.price = node.nodeValue);
-  const targets = (original.match(/\d[\d,]*/g) || []).map((n) => Number(n.replace(/,/g, '')));
+  const found = original.match(NUMBER) || [];
+  const targets = found.map((n) => Number(n.replace(/[^\d]/g, '')));
+  const seps = found.map((n) => (n.match(/[,\u00a0 ]/) || [''])[0] || (original.includes(',') ? ',' : '\u00a0'));
   if (!targets.length) return;
   const delay = parseInt(card.style.getPropertyValue('--delay'), 10) || 0;
   const start = performance.now() + delay + 150;
@@ -189,7 +195,7 @@ function countUp(card) {
     const p = Math.max(0, Math.min(1, (now - start) / duration));
     const eased = 1 - Math.pow(1 - p, 3);
     let i = 0;
-    node.nodeValue = original.replace(/\d[\d,]*/g, () => Math.round(targets[i++] * eased).toLocaleString('en-US'));
+    node.nodeValue = original.replace(NUMBER, () => { const k = i++; return groupDigits(Math.round(targets[k] * eased), seps[k]); });
     if (p < 1) requestAnimationFrame(step);
   };
   requestAnimationFrame(step);

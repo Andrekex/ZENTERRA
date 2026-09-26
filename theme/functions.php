@@ -11,6 +11,7 @@ define( 'ZENTERRA_VERSION', wp_get_theme()->get( 'Version' ) );
 
 require get_template_directory() . '/inc/i18n.php';
 require get_template_directory() . '/inc/contact.php';
+require get_template_directory() . '/inc/prices.php';
 
 add_action( 'after_setup_theme', function () {
 	add_theme_support( 'title-tag' );
@@ -20,24 +21,12 @@ add_action( 'after_setup_theme', function () {
 add_action( 'wp_enqueue_scripts', function () {
 	$uri = get_template_directory_uri();
 
-	wp_enqueue_style(
-		'zenterra-fonts',
-		'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap',
-		array(),
-		null
-	);
+	// Fonts are self-hosted, so visitors' browsers don't contact Google.
+	wp_enqueue_style( 'zenterra-fonts', $uri . '/assets/fonts.css', array(), ZENTERRA_VERSION );
 	wp_enqueue_style( 'zenterra', $uri . '/assets/styles.css', array( 'zenterra-fonts' ), ZENTERRA_VERSION );
 	wp_enqueue_script( 'zenterra', $uri . '/assets/main.js', array(), ZENTERRA_VERSION, array( 'strategy' => 'defer', 'in_footer' => true ) );
 	wp_enqueue_script( 'zenterra-bg', $uri . '/assets/bg.js', array(), ZENTERRA_VERSION, array( 'strategy' => 'defer', 'in_footer' => true ) );
 } );
-
-add_filter( 'wp_resource_hints', function ( $urls, $relation ) {
-	if ( 'preconnect' === $relation ) {
-		$urls[] = 'https://fonts.googleapis.com';
-		$urls[] = array( 'href' => 'https://fonts.gstatic.com', 'crossorigin' );
-	}
-	return $urls;
-}, 10, 2 );
 
 add_action( 'wp_head', function () {
 	$assets = get_template_directory_uri() . '/assets/';
@@ -52,17 +41,6 @@ add_action( 'wp_head', function () {
 	}
 	printf( '<link rel="manifest" href="%s">' . "\n", esc_url( $assets . 'site.webmanifest' ) );
 
-	// Leave meta tags to an SEO plugin when one is active.
-	if ( zenterra_is_home_view() && ! defined( 'WPSEO_VERSION' ) && ! class_exists( 'RankMath' ) ) {
-		$description = __( 'Zenterra is a team of experienced developers who use AI to work faster. We build websites, apps and AI solutions that solve real business problems, at a fixed price, with every line of code reviewed.', 'zenterra' );
-		printf( '<meta name="description" content="%s">' . "\n", esc_attr( $description ) );
-		printf( '<meta property="og:title" content="%s">' . "\n", esc_attr__( 'Zenterra — Experienced developers, powered by AI', 'zenterra' ) );
-		printf( '<meta property="og:description" content="%s">' . "\n", esc_attr__( 'Websites, apps and AI solutions for real business problems. Fixed price, every line reviewed.', 'zenterra' ) );
-		echo '<meta property="og:type" content="website">' . "\n";
-		printf( '<meta property="og:image" content="%s">' . "\n", esc_url( $assets . 'zenterra-mark-1024.png' ) );
-		echo '<meta property="og:image:width" content="1024"><meta property="og:image:height" content="1024">' . "\n";
-		echo '<meta name="twitter:card" content="summary">' . "\n";
-	}
 	echo '<meta name="theme-color" content="#0B0B10">' . "\n";
 }, 1 );
 
@@ -70,7 +48,7 @@ add_action( 'wp_head', function () {
  * Link to a section of the one-page layout, from any page.
  */
 function zenterra_section_url( $id ) {
-	return zenterra_is_home_view() ? '#' . $id : home_url( '/#' . $id );
+	return zenterra_is_home_view() ? '#' . $id : zenterra_lang_url( zenterra_lang() ) . '#' . $id;
 }
 
 /**
@@ -100,3 +78,7 @@ add_action( 'do_faviconico', function () {
 		exit;
 	}
 } );
+
+// Don't advertise the WordPress version (page head and feeds).
+remove_action( 'wp_head', 'wp_generator' );
+add_filter( 'the_generator', '__return_empty_string' );

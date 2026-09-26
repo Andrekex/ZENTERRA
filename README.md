@@ -14,7 +14,11 @@ theme/                    → deployed to wp-content/themes/zenterra
   front-page.php          the homepage (all sections)
   index.php               posts, pages, archives, 404
   inc/contact.php         contact form handler (sends via wp_mail)
-  inc/i18n.php            English / Ukrainian routing, switcher, hreflang
+  inc/i18n.php            English / Ukrainian routing, switcher, hreflang, SEO tags
+  inc/prices.php          prices per language (USD / UAH), used by the pricing cards
+  inc/privacy/en.html, uk.html  privacy policy text (/privacy-policy/, /uk/privacy-policy/)
+  tpl-privacy.php         privacy policy page template
+  assets/fonts/           self-hosted fonts (no requests to Google)
   languages/uk.po         Ukrainian translation (edit this)
   languages/uk.mo, .l10n.php  compiled by bin/build-translations.py
   assets/                 styles.css, main.js, favicon.svg
@@ -27,12 +31,20 @@ deploy.sh                 runs on the server, installs theme/
 
 Homepage text, prices and FAQ are in `theme/front-page.php`. Edit the file, push to `main`, and CI deploys it. Contact form options are at the top of `theme/inc/contact.php`.
 
+Contact details (email default, Telegram, Calendly booking link, LinkedIn page) are constants at the top of `theme/inc/contact.php`.
+
 Set these in wp-admin:
 - **Settings → General:** site title and tagline, which make up the browser tab title.
 - **Appearance → Customize → Contact form:** where requests are sent. The default is the admin email.
 - **Appearance → Customize → Site Identity:** Site Icon. If none is set, the theme's favicon is used.
 
 On shared hosting, `wp_mail` delivery is more reliable with an SMTP plugin such as WP Mail SMTP.
+
+## Prices and privacy policy
+
+Prices for both languages are in `theme/inc/prices.php`: one line per service, English (USD) and Ukrainian (UAH). Other price mentions in sentences (comparison table, FAQ, "from …" lines) are translated in `theme/languages/uk.po`.
+
+The privacy policy text is plain HTML in `theme/inc/privacy/en.html` and `uk.html`. Update the "Last updated" date when you change it. It is a template; have a lawyer review it.
 
 ## Ukrainian version
 

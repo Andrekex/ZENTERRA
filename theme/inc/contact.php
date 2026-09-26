@@ -22,12 +22,17 @@ function zenterra_contact_topics() {
 	);
 }
 
-function zenterra_contact_budgets() {
+function zenterra_contact_budgets( $lang = 'en' ) {
+	if ( 'uk' === $lang ) {
+		return array( 'До 15 000 грн', '15 000–30 000 грн', '30 000–60 000 грн', '60 000+ грн', 'Ще не знаю' );
+	}
 	return array( 'Under $1,500', '$1,500–3,000', '$3,000–6,000', '$6,000+', 'Not sure yet' );
 }
 
 define( 'ZENTERRA_DEFAULT_EMAIL', 'administration@zenterrait.com' );
 define( 'ZENTERRA_TELEGRAM', 'zenterrait' );
+define( 'ZENTERRA_CALENDLY', 'https://calendly.com/andriikostinwork/30min' );
+define( 'ZENTERRA_LINKEDIN', 'https://www.linkedin.com/company/zenterrait/' );
 
 /**
  * Where requests are sent, also shown on the page.
@@ -89,7 +94,8 @@ function zenterra_handle_contact() {
 	$examples = sanitize_text_field( $field( 'examples' ) );
 	$deadline = sanitize_text_field( $field( 'deadline' ) );
 	$topic    = in_array( $field( 'topic' ), zenterra_contact_topics(), true ) ? $field( 'topic' ) : 'Something else';
-	$budget   = in_array( $field( 'budget' ), zenterra_contact_budgets(), true ) ? $field( 'budget' ) : 'Not sure yet';
+	$lang     = 'uk' === $field( 'lang' ) ? 'uk' : 'en';
+	$budget   = in_array( $field( 'budget' ), zenterra_contact_budgets( $lang ), true ) ? $field( 'budget' ) : 'Not sure yet';
 
 	if ( '' === $name || ! is_email( $email ) || '' === $goal ) {
 		$done( 'invalid' );
@@ -101,6 +107,7 @@ function zenterra_handle_contact() {
 		"Service: $topic",
 		"Budget: $budget",
 		'Deadline: ' . ( $deadline ?: '—' ),
+		'Language: ' . ( 'uk' === $lang ? 'Ukrainian' : 'English' ),
 		'',
 		'Business and goal:',
 		$goal,

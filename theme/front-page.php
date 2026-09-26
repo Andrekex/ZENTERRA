@@ -14,7 +14,7 @@ $statuses = array(
 $status = isset( $_GET['contact'] ) ? sanitize_key( wp_unslash( $_GET['contact'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification
 list( $status_class, $status_text ) = isset( $statuses[ $status ] )
 	? $statuses[ $status ]
-	: array( ' muted', __( "We'll reply within 24–48 hours.", 'zenterra' ) );
+	: array( '', '' );
 
 get_header();
 ?>
@@ -28,7 +28,7 @@ get_header();
     <p class="lead"><?php esc_html_e( 'We\'re professional developers with many years of experience behind us. AI makes us faster, but it\'s experience that solves your business problem. Fixed price, honest estimates, and every change reviewed by an experienced developer before it reaches you.', 'zenterra' ); ?></p>
     <div class="hero-cta">
       <a href="#contact" class="btn btn-primary"><?php esc_html_e( 'Get a proposal in 48 hours', 'zenterra' ); ?></a>
-      <a href="#pricing" class="btn btn-ghost"><?php esc_html_e( 'See pricing', 'zenterra' ); ?></a>
+      <a href="<?php echo esc_url( ZENTERRA_CALENDLY ); ?>" class="btn btn-ghost" target="_blank" rel="noopener"><svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><?php esc_html_e( 'Book a free 30-min call', 'zenterra' ); ?></a>
     </div>
     <dl class="stats">
       <div><dt><?php esc_html_e( '1–2 weeks', 'zenterra' ); ?></dt><dd><?php esc_html_e( 'for a typical company website', 'zenterra' ); ?></dd></div>
@@ -192,32 +192,32 @@ get_header();
     <div class="price-grid snap-row" id="panel-web" role="tabpanel" aria-labelledby="tab-web">
       <article class="card price">
         <h3><?php esc_html_e( 'Landing page', 'zenterra' ); ?></h3>
-        <p class="price-tag">$800–1,500</p>
+        <p class="price-tag"><?php echo esc_html( zenterra_price( 'landing' ) ); ?></p>
         <p class="price-time"><?php esc_html_e( '3–5 days', 'zenterra' ); ?></p>
         <p class="muted"><?php esc_html_e( 'One page, responsive, forms and basic SEO.', 'zenterra' ); ?></p>
       </article>
       <article class="card price featured">
         <span class="badge"><?php esc_html_e( 'Most popular', 'zenterra' ); ?></span>
         <h3><?php esc_html_e( 'Company website', 'zenterra' ); ?></h3>
-        <p class="price-tag">$1,500–2,500</p>
+        <p class="price-tag"><?php echo esc_html( zenterra_price( 'company' ) ); ?></p>
         <p class="price-time"><?php esc_html_e( '1–2 weeks', 'zenterra' ); ?></p>
         <p class="muted"><?php esc_html_e( '5–8 pages, CMS or blog, forms and basic SEO.', 'zenterra' ); ?></p>
       </article>
       <article class="card price">
         <h3><?php esc_html_e( 'Advanced website', 'zenterra' ); ?></h3>
-        <p class="price-tag">$3,500–6,000</p>
+        <p class="price-tag"><?php echo esc_html( zenterra_price( 'advanced' ) ); ?></p>
         <p class="price-time"><?php esc_html_e( '2–4 weeks', 'zenterra' ); ?></p>
         <p class="muted"><?php esc_html_e( 'Animations, integrations, multiple languages, online store.', 'zenterra' ); ?></p>
       </article>
       <article class="card price">
         <h3><?php esc_html_e( 'Redesign / migration', 'zenterra' ); ?></h3>
-        <p class="price-tag">$1,500–3,000</p>
+        <p class="price-tag"><?php echo esc_html( zenterra_price( 'redesign' ) ); ?></p>
         <p class="price-time"><?php esc_html_e( '1–2 weeks', 'zenterra' ); ?></p>
         <p class="muted"><?php esc_html_e( 'Move from WordPress, Squarespace and others, with a fresh design.', 'zenterra' ); ?></p>
       </article>
       <article class="card price">
         <h3><?php esc_html_e( 'Website support', 'zenterra' ); ?></h3>
-        <p class="price-tag">$100–300<small><?php esc_html_e( '/mo', 'zenterra' ); ?></small></p>
+        <p class="price-tag"><?php echo esc_html( zenterra_price( 'support' ) ); ?><small><?php esc_html_e( '/mo', 'zenterra' ); ?></small></p>
         <p class="price-time"><?php esc_html_e( 'Monthly', 'zenterra' ); ?></p>
         <p class="muted"><?php esc_html_e( 'Edits, updates and uptime checks.', 'zenterra' ); ?></p>
       </article>
@@ -227,19 +227,19 @@ get_header();
       <article class="card price featured">
         <span class="badge"><?php esc_html_e( 'Start here', 'zenterra' ); ?></span>
         <h3><?php esc_html_e( 'AI audit', 'zenterra' ); ?></h3>
-        <p class="price-tag">$800–1,500</p>
+        <p class="price-tag"><?php echo esc_html( zenterra_price( 'audit' ) ); ?></p>
         <p class="price-time"><?php esc_html_e( '1 week', 'zenterra' ); ?></p>
         <p class="muted"><?php esc_html_e( 'Where AI will make a difference in your business, plus a working prototype.', 'zenterra' ); ?></p>
       </article>
       <article class="card price">
         <h3><?php esc_html_e( 'AI chatbot / assistant', 'zenterra' ); ?></h3>
-        <p class="price-tag">$1,500–5,000</p>
+        <p class="price-tag"><?php echo esc_html( zenterra_price( 'chatbot' ) ); ?></p>
         <p class="price-time"><?php esc_html_e( '1–3 weeks', 'zenterra' ); ?></p>
         <p class="muted"><?php esc_html_e( 'A bot that answers from your own knowledge base, embedded in your site.', 'zenterra' ); ?></p>
       </article>
       <article class="card price">
         <h3><?php esc_html_e( 'AI automation', 'zenterra' ); ?></h3>
-        <p class="price-tag">$2,000–8,000</p>
+        <p class="price-tag"><?php echo esc_html( zenterra_price( 'automation' ) ); ?></p>
         <p class="price-time"><?php esc_html_e( '2–4 weeks', 'zenterra' ); ?></p>
         <p class="muted"><?php esc_html_e( 'Processing leads and documents, CRM integrations, built on leading AI models.', 'zenterra' ); ?></p>
       </article>
@@ -252,7 +252,6 @@ get_header();
         <li><strong><?php esc_html_e( '2 revision rounds', 'zenterra' ); ?></strong> <?php esc_html_e( 'are included. Anything outside scope becomes a separate, priced change request.', 'zenterra' ); ?></li>
         <li><strong><?php esc_html_e( 'Your accounts, your assets.', 'zenterra' ); ?></strong> <?php esc_html_e( 'Your Wix plan, hosting and AI API usage run on your own accounts.', 'zenterra' ); ?></li>
         <li><strong><?php esc_html_e( 'You own the result.', 'zenterra' ); ?></strong> <?php esc_html_e( 'All rights to the work transfer to you once it\'s paid for.', 'zenterra' ); ?></li>
-        <li><strong><?php esc_html_e( 'Consultations', 'zenterra' ); ?></strong> <?php esc_html_e( 'are available by the hour, from $30–40/hour.', 'zenterra' ); ?></li>
       </ul>
     </div>
   </div>
@@ -414,13 +413,19 @@ get_header();
       <ul class="contact-points">
         <li><span class="muted"><?php esc_html_e( 'Email', 'zenterra' ); ?></span><a href="mailto:<?php echo esc_attr( antispambot( $contact_email ) ); ?>"><?php echo esc_html( antispambot( $contact_email ) ); ?></a></li>
         <li><span class="muted">Telegram</span><a href="<?php echo esc_url( 'https://t.me/' . ZENTERRA_TELEGRAM ); ?>" target="_blank" rel="noopener">@<?php echo esc_html( ZENTERRA_TELEGRAM ); ?></a></li>
+        <li><span class="muted">LinkedIn</span><a href="<?php echo esc_url( ZENTERRA_LINKEDIN ); ?>" target="_blank" rel="noopener">Zenterra IT</a></li>
         <li><span class="muted"><?php esc_html_e( 'Response', 'zenterra' ); ?></span><?php esc_html_e( 'Within 24–48 hours', 'zenterra' ); ?></li>
         <li><span class="muted">NDA</span><?php esc_html_e( 'Available on request', 'zenterra' ); ?></li>
       </ul>
+      <div class="call-cta">
+        <p class="muted"><?php esc_html_e( 'Prefer to talk first? Pick a time that suits you.', 'zenterra' ); ?></p>
+        <a href="<?php echo esc_url( ZENTERRA_CALENDLY ); ?>" class="btn btn-ghost" target="_blank" rel="noopener"><svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><?php esc_html_e( 'Book a free 30-min call', 'zenterra' ); ?></a>
+      </div>
     </div>
 
     <form class="card form" id="contact-form" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" novalidate>
       <input type="hidden" name="action" value="zenterra_contact">
+      <input type="hidden" name="lang" value="<?php echo esc_attr( zenterra_lang() ); ?>">
       <div class="hp" aria-hidden="true">
         <label><?php esc_html_e( 'Leave this empty', 'zenterra' ); ?><input name="website" type="text" tabindex="-1" autocomplete="off"></label>
       </div>
@@ -444,8 +449,8 @@ get_header();
       <div class="field-row">
         <label><?php esc_html_e( 'Budget', 'zenterra' ); ?>
           <select name="budget">
-            <?php foreach ( zenterra_contact_budgets() as $budget ) : ?>
-              <option value="<?php echo esc_attr( $budget ); ?>"<?php selected( $budget, '$1,500–3,000' ); ?>><?php echo esc_html( __( $budget, 'zenterra' ) ); // phpcs:ignore WordPress.WP.I18n ?></option>
+            <?php foreach ( zenterra_contact_budgets( zenterra_lang() ) as $i => $budget ) : ?>
+              <option value="<?php echo esc_attr( $budget ); ?>"<?php selected( $i, 1 ); ?>><?php echo esc_html( $budget ); ?></option>
             <?php endforeach; ?>
           </select>
         </label>
@@ -455,6 +460,10 @@ get_header();
       </div>
       <button type="submit" class="btn btn-primary btn-block"><?php esc_html_e( 'Send request', 'zenterra' ); ?></button>
       <p class="form-note small<?php echo esc_attr( $status_class ); ?>" id="form-note" role="status" aria-live="polite"><?php echo esc_html( $status_text ); ?></p>
+      <p class="form-consent small muted"><?php
+        /* translators: %s: link to the privacy policy */
+        printf( esc_html__( 'By sending this form, you agree to %s. We reply within 24–48 hours.', 'zenterra' ), '<a href="' . esc_url( zenterra_privacy_url() ) . '">' . esc_html__( 'our Privacy Policy', 'zenterra' ) . '</a>' );
+      ?></p>
     </form>
   </div>
 </section>

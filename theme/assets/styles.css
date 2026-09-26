@@ -1030,3 +1030,45 @@ main, .site-footer { position: relative; z-index: 1; }
   .icon-btn { width: 42px; height: 42px; }
   .lang-switch > * { min-width: 30px; padding: 0 .25rem; }
 }
+
+/* Privacy policy page */
+.legal-content {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(24px, 5vw, 56px);
+}
+.legal-content > * { max-width: 70ch; }
+.legal-content h1 { font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: .25rem; }
+.legal-content h1 + p { color: var(--muted); margin-bottom: 2rem; }
+.legal-content h2 { font-size: 1.25rem; margin: 2.2rem 0 .7rem; }
+.legal-content p, .legal-content li { color: var(--text); line-height: 1.7; }
+.legal-content ul { padding-left: 1.2rem; margin: 0 0 1rem; }
+.legal-content li { margin-bottom: .45rem; }
+.legal-content li::marker { color: var(--accent); }
+.legal-content a { overflow-wrap: anywhere; }
+
+/* Contact form: consent line under the button; the status line is hidden until it has a message */
+.form-consent { margin: 0; text-align: center; line-height: 1.5; }
+.form-consent a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.form-note:empty { display: none; }
+.copyright a { color: inherit; }
+
+/* Icons inside buttons and links (calendar, LinkedIn) */
+.btn-icon { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.li-icon { width: 15px; height: 15px; flex: none; fill: currentColor; }
+.footer-social { display: inline-flex; align-items: center; gap: .45rem; }
+.call-cta { margin-top: 1.75rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+.call-cta p { margin: 0 0 .8rem; }
+@media (max-width: 700px) { .call-cta .btn { width: 100%; } }
+
+/* Phones: hero buttons fit one line; contact rows put the label above the value so long emails fit */
+@media (max-width: 700px) {
+  .hero-cta .btn { padding-inline: 1rem; font-size: .98rem; }
+}
+@media (max-width: 420px) {
+  .contact-points li { grid-template-columns: 1fr; gap: .2rem; }
+  .contact-points .muted { font-size: .82rem; }
+  .contact-points a { word-break: normal; overflow-wrap: anywhere; }
+}
