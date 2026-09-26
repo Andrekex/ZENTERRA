@@ -49,17 +49,26 @@ function zenterra_is_home_view() {
 	return is_front_page() || 'uk' === get_query_var( 'zt_lang' );
 }
 
-// Front-end locale follows the URL; wp-admin keeps its own language.
+// Front-end locale follows the URL only, never the site's language setting: / is always
+// English and /uk/ always Ukrainian, even when Settings → General is set to Українська
+// (as on Hostiq). wp-admin keeps its own language.
 add_filter( 'locale', function ( $locale ) {
-	if ( is_admin() || wp_doing_ajax() ) {
+	if ( is_admin() || wp_doing_ajax() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
 		return $locale;
 	}
-	return 'uk' === zenterra_lang() ? 'uk' : $locale;
+	return 'uk' === zenterra_lang() ? 'uk' : 'en_US';
 } );
 
 add_action( 'after_setup_theme', function () {
+	// WordPress loads its own strings (html lang, dates…) in the site language before the
+	// theme runs; reload them in the page's language so / is fully English.
+	if ( ! is_admin() && ! wp_doing_ajax() && ! ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
+		unload_textdomain( 'default', true );
+		load_default_textdomain( 'uk' === zenterra_lang() ? 'uk' : 'en_US' );
+		$GLOBALS['wp_locale'] = new WP_Locale();
+	}
 	load_theme_textdomain( 'zenterra', get_template_directory() . '/languages' );
-} );
+}, 0 );
 
 // /uk/ → Ukrainian homepage.
 add_filter( 'query_vars', function ( $vars ) {
