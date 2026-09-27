@@ -671,9 +671,6 @@ msgstr "Протягом 24–48 годин"
 msgid "Available on request"
 msgstr "За запитом"
 
-msgid "Leave this empty"
-msgstr "Залиште порожнім"
-
 msgid "Name"
 msgstr "Ім’я"
 

@@ -226,7 +226,6 @@ return array(
 		'Response' => 'Відповідь',
 		'Within 24–48 hours' => 'Протягом 24–48 годин',
 		'Available on request' => 'За запитом',
-		'Leave this empty' => 'Залиште порожнім',
 		'Name' => 'Ім’я',
 		'What do you need?' => 'Що вам потрібно?',
 		'About your business and goal' => 'Про ваш бізнес і мету',

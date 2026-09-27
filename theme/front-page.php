@@ -459,7 +459,7 @@ get_header();
       <input type="hidden" name="action" value="zenterra_contact">
       <input type="hidden" name="lang" value="<?php echo esc_attr( zenterra_lang() ); ?>">
       <div class="hp" aria-hidden="true">
-        <label><?php esc_html_e( 'Leave this empty', 'zenterra' ); ?><input name="website" type="text" tabindex="-1" autocomplete="off"></label>
+        <input name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
       </div>
       <div class="field-row">
         <label><?php esc_html_e( 'Name', 'zenterra' ); ?><input name="name" type="text" autocomplete="name" required></label>
