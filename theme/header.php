@@ -1,9 +1,10 @@
 <!doctype html>
-<html <?php language_attributes(); ?> translate="no">
+<html <?php language_attributes(); ?> translate="no" data-theme="dark">
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script>
+		// Dark by default; a visitor's own choice from the toggle wins.
 		try { const t = localStorage.getItem('zt-theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
 	</script>
 	<?php wp_head(); ?>
