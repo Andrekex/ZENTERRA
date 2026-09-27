@@ -179,10 +179,8 @@ add_action( 'wp_head', function () {
 	printf( '<link rel="alternate" hreflang="uk" href="%s">' . "\n", esc_url( zenterra_url( 'uk', $page ) ) );
 	printf( '<link rel="alternate" hreflang="x-default" href="%s">' . "\n", esc_url( zenterra_url( 'en', $page ) ) );
 
-	// Description and social previews; left to an SEO plugin when one is active.
-	if ( defined( 'WPSEO_VERSION' ) || class_exists( 'RankMath' ) ) {
-		return;
-	}
+	// Description and social previews. The theme owns these on its own pages (SEO plugins are
+	// told to skip them below), so they're always present and never duplicated.
 	$uk  = 'uk' === zenterra_lang();
 	$url = zenterra_url( zenterra_lang(), $page );
 	if ( 'privacy' === $page ) {
@@ -221,6 +219,39 @@ add_action( 'wp_head', function () {
 		echo '<script type="application/ld+json">' . wp_json_encode( $org, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>' . "\n";
 	}
 }, 2 );
+
+// On the theme's pages, stop SEO plugins (Rank Math, Yoast) adding a second — or, when
+// unconfigured, an empty — set of tags. They still handle regular posts and pages.
+add_action( 'wp_head', function () {
+	if ( 'privacy' === zenterra_page() || zenterra_is_home_view() ) {
+		remove_all_actions( 'rank_math/head' );
+	}
+}, 0 );
+add_filter( 'wpseo_frontend_presenters', function ( $presenters ) {
+	return ( 'privacy' === zenterra_page() || zenterra_is_home_view() ) ? array() : $presenters;
+} );
+
+// Sitemap: the theme's pages (both homepages, both privacy pages) for Google Search Console.
+add_action( 'wp_sitemaps_init', function ( $sitemaps ) {
+	$sitemaps->registry->add_provider( 'zenterra', new class() extends WP_Sitemaps_Provider {
+		public function __construct() {
+			$this->name        = 'zenterra';
+			$this->object_type = 'zenterra';
+		}
+		public function get_url_list( $page_num, $object_subtype = '' ) {
+			$urls = array();
+			foreach ( array( '', 'privacy' ) as $page ) {
+				foreach ( array( 'en', 'uk' ) as $lang ) {
+					$urls[] = array( 'loc' => zenterra_url( $lang, $page ) );
+				}
+			}
+			return $urls;
+		}
+		public function get_max_num_pages( $object_subtype = '' ) {
+			return 1;
+		}
+	} );
+} );
 
 // Cyrillic-capable heading font, and strings used by main.js.
 add_action( 'wp_enqueue_scripts', function () {

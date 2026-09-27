@@ -154,6 +154,8 @@ const REVEAL = [
   ['.quality-grid .card', ['left', 'right']],
   ['.agencies-copy > *', 'left'],
   ['.wl-visual', 'right'],
+  ['.team-copy > *', 'left'],
+  ['.team-card', 'right'],
   ['.faq details', 'right'],
   ['.contact-inner > div', 'left'],
   ['.contact-inner .form', 'right'],

@@ -114,7 +114,7 @@ get_header();
           <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01"/></svg>
         </div>
         <h3><?php esc_html_e( 'Websites', 'zenterra' ); ?></h3>
-        <p class="muted"><?php esc_html_e( 'On WordPress, Next.js, Astro, Wix Studio or Webflow.', 'zenterra' ); ?></p>
+        <p class="muted"><?php esc_html_e( 'On WordPress, Next.js, Astro or Webflow.', 'zenterra' ); ?></p>
         <ul class="checks">
           <li><?php esc_html_e( 'Landing pages and company websites', 'zenterra' ); ?></li>
           <li><?php esc_html_e( 'Custom WordPress themes and plugins', 'zenterra' ); ?></li>
@@ -158,7 +158,7 @@ get_header();
       <dl class="stack-grid snap-row">
         <div><dt><?php esc_html_e( 'Frontend', 'zenterra' ); ?></dt><dd>React</dd><dd>Next.js</dd><dd>Astro</dd><dd>TypeScript</dd><dd>JavaScript</dd><dd>HTML</dd><dd>CSS</dd></div>
         <div><dt><?php esc_html_e( 'Backend', 'zenterra' ); ?></dt><dd>Node.js</dd><dd>NestJS</dd><dd>PHP</dd><dd><?php esc_html_e( 'REST APIs', 'zenterra' ); ?></dd></div>
-        <div><dt><?php esc_html_e( 'CMS & e‑commerce', 'zenterra' ); ?></dt><dd>WordPress</dd><dd>WooCommerce</dd><dd><?php esc_html_e( 'Custom WordPress plugins', 'zenterra' ); ?></dd><dd>Wix Studio</dd><dd>Webflow</dd></div>
+        <div><dt><?php esc_html_e( 'CMS & e‑commerce', 'zenterra' ); ?></dt><dd>WordPress</dd><dd>WooCommerce</dd><dd><?php esc_html_e( 'Custom WordPress plugins', 'zenterra' ); ?></dd><dd>Webflow</dd></div>
         <div><dt><?php esc_html_e( 'Mobile', 'zenterra' ); ?></dt><dd>React Native</dd><dd>iOS</dd><dd>Android</dd></div>
         <div><dt><?php esc_html_e( 'AI tools', 'zenterra' ); ?></dt><dd>Claude</dd><dd>ChatGPT</dd><dd>Gemini</dd><dd>Cursor</dd><dd>RAG</dd></div>
       </dl>
@@ -166,7 +166,7 @@ get_header();
     <div class="audiences">
       <h3 class="h-small"><?php esc_html_e( 'Who we work with', 'zenterra' ); ?></h3>
       <ul class="chips">
-        <li><?php esc_html_e( 'Small businesses in the US and EU', 'zenterra' ); ?></li>
+        <li><?php esc_html_e( 'Small businesses in Europe and internationally', 'zenterra' ); ?></li>
         <li><?php esc_html_e( 'Startups that need an MVP or AI features', 'zenterra' ); ?></li>
         <li><?php esc_html_e( 'Agencies that need extra hands', 'zenterra' ); ?></li>
         <li><?php esc_html_e( 'Businesses in Ukraine and Poland', 'zenterra' ); ?></li>
@@ -250,7 +250,7 @@ get_header();
       <ul class="terms-list">
         <li><strong><?php esc_html_e( '50% upfront', 'zenterra' ); ?></strong> <?php esc_html_e( 'for websites; larger projects are paid 30–50% upfront, then by milestone.', 'zenterra' ); ?></li>
         <li><strong><?php esc_html_e( '2 revision rounds', 'zenterra' ); ?></strong> <?php esc_html_e( 'are included. Anything outside scope becomes a separate, priced change request.', 'zenterra' ); ?></li>
-        <li><strong><?php esc_html_e( 'Your accounts, your assets.', 'zenterra' ); ?></strong> <?php esc_html_e( 'Your Wix plan, hosting and AI API usage run on your own accounts.', 'zenterra' ); ?></li>
+        <li><strong><?php esc_html_e( 'Your accounts, your assets.', 'zenterra' ); ?></strong> <?php esc_html_e( 'Your hosting, domain and AI API usage run on your own accounts.', 'zenterra' ); ?></li>
         <li><strong><?php esc_html_e( 'You own the result.', 'zenterra' ); ?></strong> <?php esc_html_e( 'All rights to the work transfer to you once it\'s paid for.', 'zenterra' ); ?></li>
       </ul>
     </div>
@@ -333,7 +333,7 @@ get_header();
     <div class="agencies-copy">
       <p class="eyebrow"><?php esc_html_e( 'For agencies', 'zenterra' ); ?></p>
       <h2><?php esc_html_e( 'Your brand. Our team. Fixed price.', 'zenterra' ); ?></h2>
-      <p class="section-lead"><?php esc_html_e( 'Too many orders and not enough people? You handle sales and the client relationship. We build websites on WordPress, Next.js, Wix Studio or Webflow, plus apps and AI integrations, under your brand.', 'zenterra' ); ?></p>
+      <p class="section-lead"><?php esc_html_e( 'Too many orders and not enough people? You handle sales and the client relationship. We build websites on WordPress, Next.js or Webflow, plus apps and AI integrations, under your brand.', 'zenterra' ); ?></p>
       <ul class="checks">
         <li><?php esc_html_e( 'White-label delivery, with no contact with your clients unless you want it', 'zenterra' ); ?></li>
         <li><?php esc_html_e( 'Fixed price per project, so your margin is predictable', 'zenterra' ); ?></li>
@@ -356,6 +356,38 @@ get_header();
       </div>
     </div>
    </div>
+  </div>
+</section>
+
+<!-- Team -->
+<section class="section" id="team">
+  <div class="container team-inner">
+    <div class="team-copy">
+      <div class="section-head">
+        <p class="eyebrow"><?php esc_html_e( 'Your team', 'zenterra' ); ?></p>
+        <h2><?php esc_html_e( "Who you'll work with", 'zenterra' ); ?></h2>
+        <p class="section-lead"><?php esc_html_e( 'You work directly with our team lead, a senior developer with many years of experience building websites and web apps for international clients, from company sites to MVPs.', 'zenterra' ); ?></p>
+      </div>
+      <p><?php esc_html_e( 'We build with AI tools like Claude, Cursor and ChatGPT, and bring in trusted developers when a project needs more hands. The team lead sets the architecture, writes the specifications and personally reviews every change before it goes live.', 'zenterra' ); ?></p>
+      <p><?php esc_html_e( "You talk to the person responsible for your project: no account managers, no hand-offs. If something can be done simpler or cheaper, we'll tell you.", 'zenterra' ); ?></p>
+      <ul class="checks">
+        <li><?php esc_html_e( 'Direct communication in English and Ukrainian', 'zenterra' ); ?></li>
+        <li><?php esc_html_e( 'Every pull request reviewed personally by the team lead', 'zenterra' ); ?></li>
+        <li><?php esc_html_e( 'Working hours that overlap with the whole European workday', 'zenterra' ); ?></li>
+      </ul>
+      <a href="<?php echo esc_url( ZENTERRA_LINKEDIN ); ?>" class="btn btn-ghost" target="_blank" rel="noopener"><svg class="li-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1V21h-4v-5.1c0-1.22-.02-2.78-1.7-2.78-1.7 0-1.96 1.33-1.96 2.7V21h-4z"/></svg><?php esc_html_e( 'Zenterra IT on LinkedIn', 'zenterra' ); ?></a>
+    </div>
+
+    <aside class="card team-card" aria-label="<?php esc_attr_e( 'Team lead', 'zenterra' ); ?>">
+      <div class="team-avatar"><svg class="team-mark" viewBox="9 11 46 42" aria-hidden="true"><defs><linearGradient id="zt-mark-team" x1="12" y1="10" x2="52" y2="54" gradientUnits="userSpaceOnUse"><stop stop-color="#B9B9B9"/><stop offset="1" stop-color="#5C16FF"/></linearGradient></defs><g fill="url(#zt-mark-team)"><rect x="10" y="25" width="6" height="14" rx="3"/><rect x="19.5" y="18" width="6" height="28" rx="3"/><rect x="29" y="12" width="6" height="40" rx="3"/><rect x="38.5" y="20" width="6" height="24" rx="3"/><rect x="48" y="26" width="6" height="12" rx="3"/></g></svg></div>
+      <p class="team-role"><?php esc_html_e( 'Team lead', 'zenterra' ); ?></p>
+      <p class="muted"><?php esc_html_e( 'Senior developer', 'zenterra' ); ?> · Zenterra IT</p>
+      <dl class="team-facts">
+        <div><dt><?php esc_html_e( 'Stack', 'zenterra' ); ?></dt><dd>React · Next.js · Node.js · WordPress</dd></div>
+        <div><dt><?php esc_html_e( 'Languages', 'zenterra' ); ?></dt><dd><?php esc_html_e( 'English, Ukrainian', 'zenterra' ); ?></dd></div>
+        <div><dt><?php esc_html_e( 'Code review', 'zenterra' ); ?></dt><dd><?php esc_html_e( 'Every change, personally', 'zenterra' ); ?></dd></div>
+      </dl>
+    </aside>
   </div>
 </section>
 
@@ -384,8 +416,8 @@ get_header();
         <p><?php esc_html_e( 'You do. All rights to the work transfer to you once it\'s paid for. Your site, hosting and API keys stay on your own accounts from day one.', 'zenterra' ); ?></p>
       </details>
       <details>
-        <summary><?php esc_html_e( 'Which platform should I choose: WordPress, Next.js, Wix Studio or Webflow?', 'zenterra' ); ?></summary>
-        <p><?php esc_html_e( 'WordPress is the flexible all-rounder with a huge plugin ecosystem, great for content-heavy sites and blogs. Wix Studio and Webflow suit teams that want to edit visually without a developer. Next.js is best for custom functionality, speed and deeper integrations. We\'ll recommend one during the brief.', 'zenterra' ); ?></p>
+        <summary><?php esc_html_e( 'Which platform should I choose: WordPress, Next.js, Astro or Webflow?', 'zenterra' ); ?></summary>
+        <p><?php esc_html_e( 'WordPress is the flexible all-rounder with a huge plugin ecosystem, great for content-heavy sites, blogs and WooCommerce stores. Webflow suits teams that want to edit visually without a developer. Next.js and Astro are best for custom functionality, speed and deeper integrations. We\'ll recommend one during the brief.', 'zenterra' ); ?></p>
       </details>
       <details>
         <summary><?php esc_html_e( 'What happens if I need changes beyond the two revision rounds?', 'zenterra' ); ?></summary>
@@ -396,8 +428,8 @@ get_header();
         <p><?php esc_html_e( 'We invoice in USD. Websites are 50% upfront and 50% at launch. Larger projects are paid by milestone. Payment is by international bank transfer (SWIFT), or through Upwork if we\'re working there.', 'zenterra' ); ?></p>
       </details>
       <details>
-        <summary><?php esc_html_e( 'Do you work with clients outside the US?', 'zenterra' ); ?></summary>
-        <p><?php esc_html_e( 'Yes. We work with small businesses and startups across the US and EU, plus Ukraine and Poland.', 'zenterra' ); ?></p>
+        <summary><?php esc_html_e( 'Where are your clients?', 'zenterra' ); ?></summary>
+        <p><?php esc_html_e( 'We work with small businesses, startups and agencies internationally: across Europe, including Ukraine and Poland, and beyond.', 'zenterra' ); ?></p>
       </details>
     </div>
   </div>

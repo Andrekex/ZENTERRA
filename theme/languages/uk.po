@@ -302,8 +302,8 @@ msgstr "ШІ-автоматизація"
 msgid "Who we work with"
 msgstr "З ким ми працюємо"
 
-msgid "Small businesses in the US and EU"
-msgstr "Малий бізнес у США та ЄС"
+msgid "Small businesses in Europe and internationally"
+msgstr "Малий бізнес у Європі та по всьому світу"
 
 msgid "Startups that need an MVP or AI features"
 msgstr "Стартапи, яким потрібен MVP чи ШІ-функції"
@@ -407,8 +407,8 @@ msgstr "входять у ціну. Усе, що поза обсягом, офо
 msgid "Your accounts, your assets."
 msgstr "Ваші акаунти — ваші активи."
 
-msgid "Your Wix plan, hosting and AI API usage run on your own accounts."
-msgstr "Тариф Wix, хостинг і використання ШІ-API оформлені на ваші акаунти."
+msgid "Your hosting, domain and AI API usage run on your own accounts."
+msgstr "Хостинг, домен і використання ШІ-API оформлені на ваші акаунти."
 
 msgid "You own the result."
 msgstr "Результат належить вам."
@@ -584,8 +584,8 @@ msgstr "Резервне живлення та інтернет у кожног�
 msgid "Your brand. Our team. Fixed price."
 msgstr "Ваш бренд. Наша команда. Фіксована ціна."
 
-msgid "Too many orders and not enough people? You handle sales and the client relationship. We build websites on WordPress, Next.js, Wix Studio or Webflow, plus apps and AI integrations, under your brand."
-msgstr "Замовлень більше, ніж людей? Ви продаєте й спілкуєтеся з клієнтом, а ми робимо сайти на WordPress, Next.js, Wix Studio чи Webflow, а також застосунки й ШІ-інтеграції під вашим брендом."
+msgid "Too many orders and not enough people? You handle sales and the client relationship. We build websites on WordPress, Next.js or Webflow, plus apps and AI integrations, under your brand."
+msgstr "Замовлень більше, ніж людей? Ви продаєте й спілкуєтеся з клієнтом, а ми робимо сайти на WordPress, Next.js чи Webflow, а також застосунки й ШІ-інтеграції під вашим брендом."
 
 msgid "White-label delivery, with no contact with your clients unless you want it"
 msgstr "White-label: жодного контакту з вашими клієнтами, якщо ви цього не хочете"
@@ -629,11 +629,11 @@ msgstr "Кому належать сайт і код?"
 msgid "You do. All rights to the work transfer to you once it's paid for. Your site, hosting and API keys stay on your own accounts from day one."
 msgstr "Вам. Усі права на роботу переходять до вас після оплати. Сайт, хостинг і API-ключі з першого дня на ваших акаунтах."
 
-msgid "Which platform should I choose: WordPress, Next.js, Wix Studio or Webflow?"
-msgstr "Яку платформу обрати: WordPress, Next.js, Wix Studio чи Webflow?"
+msgid "Which platform should I choose: WordPress, Next.js, Astro or Webflow?"
+msgstr "Яку платформу обрати: WordPress, Next.js, Astro чи Webflow?"
 
-msgid "WordPress is the flexible all-rounder with a huge plugin ecosystem, great for content-heavy sites and blogs. Wix Studio and Webflow suit teams that want to edit visually without a developer. Next.js is best for custom functionality, speed and deeper integrations. We'll recommend one during the brief."
-msgstr "WordPress — гнучкий універсал із величезною екосистемою плагінів, чудовий для контентних сайтів і блогів. Wix Studio та Webflow підходять командам, які хочуть редагувати сайт візуально, без розробника. Next.js — найкращий вибір для нестандартного функціоналу, швидкості й глибоких інтеграцій. Ми порадимо варіант під час брифу."
+msgid "WordPress is the flexible all-rounder with a huge plugin ecosystem, great for content-heavy sites, blogs and WooCommerce stores. Webflow suits teams that want to edit visually without a developer. Next.js and Astro are best for custom functionality, speed and deeper integrations. We'll recommend one during the brief."
+msgstr "WordPress — гнучкий універсал із величезною екосистемою плагінів, чудовий для контентних сайтів, блогів і магазинів на WooCommerce. Webflow підходить командам, які хочуть редагувати сайт візуально, без розробника. Next.js та Astro — найкращий вибір для нестандартного функціоналу, швидкості й глибоких інтеграцій. Ми порадимо варіант під час брифу."
 
 msgid "What happens if I need changes beyond the two revision rounds?"
 msgstr "Що, як мені потрібні зміни понад два кола правок?"
@@ -647,11 +647,11 @@ msgstr "Як оплатити?"
 msgid "We invoice in USD. Websites are 50% upfront and 50% at launch. Larger projects are paid by milestone. Payment is by international bank transfer (SWIFT), or through Upwork if we're working there."
 msgstr "Для клієнтів з України рахунки виставляємо в гривнях, для іноземних — у доларах США. Сайти — 50% наперед і 50% після запуску. Більші проєкти оплачуються поетапно. Оплата — банківським переказом на рахунок компанії; для іноземних клієнтів — також SWIFT або Upwork."
 
-msgid "Do you work with clients outside the US?"
+msgid "Where are your clients?"
 msgstr "Чи працюєте ви з клієнтами з України?"
 
-msgid "Yes. We work with small businesses and startups across the US and EU, plus Ukraine and Poland."
-msgstr "Так. Ми працюємо з малим бізнесом і стартапами в Україні та Польщі, а також у США та ЄС."
+msgid "We work with small businesses, startups and agencies internationally: across Europe, including Ukraine and Poland, and beyond."
+msgstr "Так. Ми працюємо з малим бізнесом, стартапами й агенціями в Україні, Польщі, по всій Європі та за її межами."
 
 msgid "Tell us what you need"
 msgstr "Розкажіть, що вам потрібно"
@@ -752,8 +752,8 @@ msgstr "$6,000+"
 msgid "Not sure yet"
 msgstr "Ще не знаю"
 
-msgid "Working with clients in the US and EU."
-msgstr "Працюємо з клієнтами в Україні, ЄС та США."
+msgid "Working with clients in Europe and internationally."
+msgstr "Працюємо з клієнтами в Україні, Європі та по всьому світу."
 
 msgid "Zenterra is a team of experienced developers who use AI to work faster. We build websites, apps and AI solutions that solve real business problems, at a fixed price, with every line of code reviewed."
 msgstr "Zenterra — команда досвідчених розробників, які використовують ШІ, щоб працювати швидше. Ми створюємо сайти, застосунки й ШІ-рішення, що вирішують реальні бізнес-задачі, за фіксованою ціною та з перевіркою кожного рядка коду."
@@ -773,8 +773,8 @@ msgstr "Сторінки, яку ви шукаєте, не існує."
 msgid "Back to homepage"
 msgstr "На головну"
 
-msgid "On WordPress, Next.js, Astro, Wix Studio or Webflow."
-msgstr "На WordPress, Next.js, Astro, Wix Studio або Webflow."
+msgid "On WordPress, Next.js, Astro or Webflow."
+msgstr "На WordPress, Next.js, Astro або Webflow."
 
 msgid "Online stores on WooCommerce"
 msgstr "Інтернет-магазини на WooCommerce"
@@ -832,3 +832,51 @@ msgstr "Безкоштовний дзвінок на 30 хв"
 
 msgid "Prefer to talk first? Pick a time that suits you."
 msgstr "Хочете спершу поговорити? Оберіть зручний час."
+
+msgid "Your team"
+msgstr "Ваша команда"
+
+msgid "Who you'll work with"
+msgstr "З ким ви працюватимете"
+
+msgid "You work directly with our team lead, a senior developer with many years of experience building websites and web apps for international clients, from company sites to MVPs."
+msgstr "Ви працюєте напряму з нашим тімлідом — досвідченим розробником, який багато років створює сайти та вебзастосунки для міжнародних клієнтів, від сайтів компаній до MVP."
+
+msgid "We build with AI tools like Claude, Cursor and ChatGPT, and bring in trusted developers when a project needs more hands. The team lead sets the architecture, writes the specifications and personally reviews every change before it goes live."
+msgstr "Ми працюємо з AI-інструментами, як-от Claude, Cursor і ChatGPT, і залучаємо перевірених розробників, коли проєкту потрібно більше рук. Тімлід відповідає за архітектуру, пише специфікації й особисто перевіряє кожну зміну перед запуском."
+
+msgid "You talk to the person responsible for your project: no account managers, no hand-offs. If something can be done simpler or cheaper, we'll tell you."
+msgstr "Ви спілкуєтеся з людиною, яка відповідає за ваш проєкт, — без менеджерів-посередників. Якщо щось можна зробити простіше чи дешевше, ми скажемо."
+
+msgid "Direct communication in English and Ukrainian"
+msgstr "Спілкування українською та англійською"
+
+msgid "Every pull request reviewed personally by the team lead"
+msgstr "Кожен pull request особисто перевіряє тімлід"
+
+msgid "Working hours that overlap with the whole European workday"
+msgstr "Робочі години, що збігаються з усім європейським робочим днем"
+
+msgid "Zenterra IT on LinkedIn"
+msgstr "Zenterra IT у LinkedIn"
+
+msgid "Team lead"
+msgstr "Тімлід"
+
+msgid "Senior developer"
+msgstr "Senior-розробник"
+
+msgid "Stack"
+msgstr "Стек"
+
+msgid "Languages"
+msgstr "Мови"
+
+msgid "English, Ukrainian"
+msgstr "Англійська, українська"
+
+msgid "Code review"
+msgstr "Рев’ю коду"
+
+msgid "Every change, personally"
+msgstr "Кожна зміна, особисто"

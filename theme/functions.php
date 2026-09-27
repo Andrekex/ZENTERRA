@@ -12,6 +12,7 @@ define( 'ZENTERRA_VERSION', wp_get_theme()->get( 'Version' ) );
 require get_template_directory() . '/inc/i18n.php';
 require get_template_directory() . '/inc/contact.php';
 require get_template_directory() . '/inc/prices.php';
+require get_template_directory() . '/inc/hardening.php';
 
 add_action( 'after_setup_theme', function () {
 	add_theme_support( 'title-tag' );
