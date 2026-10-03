@@ -227,16 +227,25 @@
     raf = 0;
   }
 
-  readColors();
-  resize();
-  draw(performance.now()); // static frame (also what reduced-motion visitors see)
+  // Set up after the page has loaded and the browser is idle, so the background never
+  // competes with the first paint; the canvas then fades in.
+  function init() {
+    readColors();
+    resize();
+    draw(performance.now()); // static frame (also what reduced-motion visitors see)
+    canvas.classList.add('ready');
 
   window.addEventListener('resize', () => { resize(); draw(performance.now()); });
   document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
   darkQuery.addEventListener('change', () => { readColors(); draw(performance.now()); });
   new MutationObserver(() => { readColors(); draw(performance.now()); })
     .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-  reduceMotion.addEventListener('change', () => (reduceMotion.matches ? stop() : start()));
+    reduceMotion.addEventListener('change', () => (reduceMotion.matches ? stop() : start()));
 
-  start();
+    start();
+  }
+
+  const whenIdle = () => ('requestIdleCallback' in window ? requestIdleCallback(init, { timeout: 2000 }) : setTimeout(init, 300));
+  if (document.readyState === 'complete') whenIdle();
+  else window.addEventListener('load', whenIdle, { once: true });
 })();

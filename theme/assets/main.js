@@ -45,7 +45,7 @@ document.querySelectorAll('.snap-row').forEach((row) => {
   };
   row.addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
   window.addEventListener('resize', update);
-  update();
+  requestAnimationFrame(update);
 });
 
 // ---------- Pricing tabs ----------
@@ -243,11 +243,12 @@ if (!reduceMotion.matches && 'IntersectionObserver' in window) {
   });
 
   // Elements already on screen start visible, so nothing flashes on load.
-  items.forEach((el) => {
-    const r = el.getBoundingClientRect();
-    const onScreen = r.top < window.innerHeight && r.bottom > 0;
+  // (All positions are read first and classes written after, so the browser lays out once.)
+  const vh = window.innerHeight;
+  const onScreen = items.map((el) => { const r = el.getBoundingClientRect(); return r.top < vh && r.bottom > 0; });
+  items.forEach((el, i) => {
     el.classList.add('reveal');
-    if (onScreen) el.classList.add('is-visible', 'settled');
+    if (onScreen[i]) el.classList.add('is-visible', 'settled');
   });
   items.forEach((el) => { stagger(el); settleAfterReveal(el); observer.observe(el); });
 

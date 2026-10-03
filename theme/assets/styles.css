@@ -285,7 +285,7 @@ html[lang|="uk"] { --font-head: "Manrope", var(--font-body); }
 }
 .marquee-track { display: flex; width: max-content; }
 .marquee-track + .marquee-track { margin-top: .7rem; }
-.marquee-track.reverse span { color: var(--accent); opacity: .8; }
+.marquee-track.reverse span { color: var(--accent); }
 .marquee-track span {
   white-space: nowrap;
   margin-right: 3rem;
@@ -345,7 +345,8 @@ main, .site-footer { position: relative; z-index: 1; }
   transform: translate3d(calc(var(--s, 0) * -30vw + var(--px, 0) * 5vw), calc(var(--s, 0) * -115vh + var(--py, 0) * 5vh), 0) rotate(calc(var(--s, 0) * 140deg));
 }
 /* Code lines and review scanner, drawn by bg.js */
-.zt-code { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .85; }
+.zt-code { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1.2s ease; }
+.zt-code.ready { opacity: .85; }
 .zt-bg::after {
   content: "";
   position: absolute; inset: 0;
@@ -724,7 +725,9 @@ main, .site-footer { position: relative; z-index: 1; }
   .hero h1 .w:nth-of-type(7) > span { animation-delay: .35s; }
   .hero h1 .w:nth-of-type(8) > span { animation-delay: .48s; }
   .hero h1 .w.accent-w > span { animation-delay: .4s; }
-  .hero-inner > .lead { animation-delay: .5s; }
+  /* The intro paragraph is the largest text on screen (LCP): it settles into place but is
+     never transparent, so it counts as painted on the very first frame. */
+  .hero-inner > .lead { animation-name: zt-settle; animation-delay: 0s; }
   .hero-inner > .hero-cta { animation-delay: .6s; }
   .hero-inner > .stats { animation-delay: .6s; }
   .stats > div { animation: zt-rise .7s cubic-bezier(.2, .7, .2, 1) both; }
@@ -866,6 +869,7 @@ main, .site-footer { position: relative; z-index: 1; }
   }
 }
 
+@keyframes zt-settle { from { transform: translateY(16px); } to { transform: none; } }
 @keyframes zt-rise { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
 @keyframes zt-underline { to { transform: scaleX(1); } }
 @keyframes zt-orb-drift { 0% { translate: 0 0; scale: 1; } 50% { translate: 8vw -6vh; scale: 1.12; } 100% { translate: -5vw 7vh; scale: .94; } }

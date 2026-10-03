@@ -21,6 +21,11 @@ jobs:
           php -v | head -1
           find theme -name '*.php' -print0 | xargs -0 -n1 php -l
 
+      - name: Check minified stylesheet is up to date
+        run: |
+          python3 bin/build-assets.py
+          git diff --exit-code theme/assets/styles.min.css
+
   deploy:
     needs: lint
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'

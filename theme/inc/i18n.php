@@ -150,16 +150,24 @@ add_filter( 'body_class', function ( $classes ) {
 	return $classes;
 } );
 
-// Page titles for Google and the browser tab.
-add_filter( 'pre_get_document_title', function ( $title ) {
+/**
+ * Title of the theme's own pages ('' for regular WordPress content).
+ */
+function zenterra_theme_title() {
 	if ( 'privacy' === zenterra_page() ) {
 		return __( 'Privacy Policy', 'zenterra' ) . ' — Zenterra IT';
 	}
 	if ( zenterra_is_home_view() ) {
 		return __( 'Zenterra IT — AI-Powered Web Development, Fixed Price', 'zenterra' );
 	}
-	return $title;
-} );
+	return '';
+}
+
+// Page titles for Google and the browser tab.
+add_filter( 'pre_get_document_title', function ( $title ) {
+	$own = zenterra_theme_title();
+	return '' !== $own ? $own : $title;
+}, 99 );
 
 // Same signal for translation extensions that look for the "notranslate" class.
 add_filter( 'body_class', function ( $classes ) {
@@ -223,9 +231,16 @@ add_action( 'wp_head', function () {
 // On the theme's pages, stop SEO plugins (Rank Math, Yoast) adding a second — or, when
 // unconfigured, an empty — set of tags. They still handle regular posts and pages.
 add_action( 'wp_head', function () {
-	if ( 'privacy' === zenterra_page() || zenterra_is_home_view() ) {
-		remove_all_actions( 'rank_math/head' );
+	$title = zenterra_theme_title();
+	if ( '' === $title ) {
+		return;
 	}
+	remove_all_actions( 'rank_math/head' );
+
+	// SEO plugins take over printing <title> (Rank Math prints it from the hook removed above),
+	// so on the theme's pages the theme prints it itself, exactly once.
+	remove_action( 'wp_head', '_wp_render_title_tag', 1 );
+	echo '<title>' . esc_html( $title ) . '</title>' . "\n";
 }, 0 );
 add_filter( 'wpseo_frontend_presenters', function ( $presenters ) {
 	return ( 'privacy' === zenterra_page() || zenterra_is_home_view() ) ? array() : $presenters;
@@ -253,11 +268,24 @@ add_action( 'wp_sitemaps_init', function ( $sitemaps ) {
 	} );
 } );
 
-// Cyrillic-capable heading font, and strings used by main.js.
-add_action( 'wp_enqueue_scripts', function () {
-	if ( 'uk' === zenterra_lang() ) {
-		wp_enqueue_style( 'zenterra-font-uk', get_template_directory_uri() . '/assets/fonts-uk.css', array(), ZENTERRA_VERSION );
+// Regular posts and pages: if nothing else printed a meta description (no SEO plugin, or one
+// that isn't configured), add one from the excerpt. The head is buffered so we can look.
+add_action( 'wp_head', function () {
+	ob_start();
+}, -9999 );
+add_action( 'wp_head', function () {
+	$head = (string) ob_get_clean();
+	if ( '' === zenterra_theme_title() && is_singular() && false === stripos( $head, 'name="description"' ) ) {
+		$desc = trim( wp_strip_all_tags( get_the_excerpt() ) );
+		if ( '' !== $desc ) {
+			$head .= sprintf( '<meta name="description" content="%s">' . "\n", esc_attr( wp_html_excerpt( $desc, 158, '…' ) ) );
+		}
 	}
+	echo $head; // phpcs:ignore WordPress.Security.EscapeOutput
+}, 9999 );
+
+// Strings used by main.js.
+add_action( 'wp_enqueue_scripts', function () {
 	wp_add_inline_script( 'zenterra', 'window.ZT_I18N = ' . wp_json_encode( array(
 		'invalid'   => __( 'Please fill in your name, a valid email and your goal.', 'zenterra' ),
 		'sending'   => __( 'Sending…', 'zenterra' ),

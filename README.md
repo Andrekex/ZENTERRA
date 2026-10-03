@@ -23,6 +23,7 @@ theme/                    → deployed to wp-content/themes/zenterra
   languages/uk.mo, .l10n.php  compiled by bin/build-translations.py
   assets/                 styles.css, main.js, favicon.svg
 bin/build-translations.py compiles languages/*.po
+bin/build-assets.py       minifies assets/styles.css into styles.min.css
 deploy.sh                 runs on the server, installs theme/
 .github/workflows/        CI: PHP lint on every push and PR; deploy on main
 ```
@@ -39,6 +40,16 @@ Set these in wp-admin:
 - **Appearance → Customize → Site Identity:** Site Icon. If none is set, the theme's favicon is used.
 
 On shared hosting, `wp_mail` delivery is more reliable with an SMTP plugin such as WP Mail SMTP.
+
+## Styles and performance
+
+After editing `theme/assets/styles.css`, run `python3 bin/build-assets.py` and commit `styles.min.css` too. The theme serves the minified file only when it is at least as new as `styles.css`; if you forget, it falls back to the readable file.
+
+What keeps the page fast (Lighthouse mobile: Performance 90+, SEO 100):
+- Fonts are self-hosted variable fonts, one file per family and alphabet. Their `@font-face` CSS is inlined and the two fonts used at the top of the page are preloaded.
+- The hero's intro paragraph is the largest element on screen (LCP), so it is never animated from invisible.
+- The animated background starts only after the page has loaded and the browser is idle.
+- `theme/assets/.htaccess` sets long browser-cache lifetimes for fonts, CSS, JS and images.
 
 ## Prices and privacy policy
 
