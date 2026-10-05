@@ -62,7 +62,7 @@ get_header();
           <tr><th scope="col"></th><th scope="col"><?php esc_html_e( 'Typical agency', 'zenterra' ); ?></th><th scope="col"><?php esc_html_e( 'Freelancer', 'zenterra' ); ?></th><th scope="col" class="hl">Zenterra</th></tr>
         </thead>
         <tbody>
-          <tr><th scope="row"><?php esc_html_e( 'Website price', 'zenterra' ); ?></th><td data-label="<?php esc_attr_e( 'Typical agency', 'zenterra' ); ?>"><?php esc_html_e( 'from $1,500–3,500', 'zenterra' ); ?></td><td data-label="<?php esc_attr_e( 'Freelancer', 'zenterra' ); ?>"><?php esc_html_e( 'cheaper', 'zenterra' ); ?></td><td class="hl" data-label="Zenterra"><?php esc_html_e( '$1,500–4,000, fixed', 'zenterra' ); ?></td></tr>
+          <tr><th scope="row"><?php esc_html_e( 'Website price', 'zenterra' ); ?></th><td data-label="<?php esc_attr_e( 'Typical agency', 'zenterra' ); ?>"><?php esc_html_e( 'from $1,500–3,500', 'zenterra' ); ?></td><td data-label="<?php esc_attr_e( 'Freelancer', 'zenterra' ); ?>"><?php esc_html_e( 'cheaper', 'zenterra' ); ?></td><td class="hl" data-label="Zenterra"><?php esc_html_e( '$1,300–3,500, fixed', 'zenterra' ); ?></td></tr>
           <tr><th scope="row"><?php esc_html_e( 'Timeline', 'zenterra' ); ?></th><td data-label="<?php esc_attr_e( 'Typical agency', 'zenterra' ); ?>"><?php esc_html_e( 'weeks', 'zenterra' ); ?></td><td data-label="<?php esc_attr_e( 'Freelancer', 'zenterra' ); ?>"><?php esc_html_e( 'unpredictable', 'zenterra' ); ?></td><td class="hl" data-label="Zenterra"><?php esc_html_e( '1–2 weeks for a typical site', 'zenterra' ); ?></td></tr>
           <tr><th scope="row"><?php esc_html_e( 'Team', 'zenterra' ); ?></th><td data-label="<?php esc_attr_e( 'Typical agency', 'zenterra' ); ?>"><?php esc_html_e( 'seniors + account manager', 'zenterra' ); ?></td><td data-label="<?php esc_attr_e( 'Freelancer', 'zenterra' ); ?>"><?php esc_html_e( 'one person', 'zenterra' ); ?></td><td class="hl" data-label="Zenterra"><?php esc_html_e( 'experienced developers, accelerated by AI', 'zenterra' ); ?></td></tr>
           <tr><th scope="row"><?php esc_html_e( 'Quality control', 'zenterra' ); ?></th><td data-label="<?php esc_attr_e( 'Typical agency', 'zenterra' ); ?>"><?php esc_html_e( 'senior review', 'zenterra' ); ?></td><td data-label="<?php esc_attr_e( 'Freelancer', 'zenterra' ); ?>"><?php esc_html_e( 'none', 'zenterra' ); ?></td><td class="hl" data-label="Zenterra"><?php esc_html_e( 'every PR reviewed + launch checklist', 'zenterra' ); ?></td></tr>
@@ -148,7 +148,7 @@ get_header();
           <li><?php esc_html_e( 'Mobile apps for iOS and Android with React Native', 'zenterra' ); ?></li>
           <li><?php esc_html_e( 'Backends and APIs in Node.js and NestJS', 'zenterra' ); ?></li>
           <li><?php esc_html_e( 'MVPs with AI features built in', 'zenterra' ); ?></li>
-          <li><?php esc_html_e( 'Projects typically from $3,000, quoted after a short scoping call', 'zenterra' ); ?></li>
+          <li><?php esc_html_e( 'Projects typically from $2,500, quoted after a short scoping call', 'zenterra' ); ?></li>
         </ul>
       </article>
     </div>
@@ -274,7 +274,7 @@ get_header();
       <li><span class="step-n">7</span><div><h3><?php esc_html_e( 'Team lead review', 'zenterra' ); ?></h3><p><?php esc_html_e( 'Every change is checked against our launch checklist.', 'zenterra' ); ?></p></div></li>
       <li><span class="step-n">8</span><div><h3><?php esc_html_e( 'Demo & revisions', 'zenterra' ); ?></h3><p><?php esc_html_e( 'You see the result and we do two rounds of revisions.', 'zenterra' ); ?></p></div></li>
       <li><span class="step-n">9</span><div><h3><?php esc_html_e( 'Launch', 'zenterra' ); ?></h3><p><?php esc_html_e( 'Live on your domain with analytics connected. The remaining 50% is due.', 'zenterra' ); ?></p></div></li>
-      <li><span class="step-n">10</span><div><h3><?php esc_html_e( 'Support', 'zenterra' ); ?></h3><p><?php esc_html_e( 'Optional monthly care from $100/month.', 'zenterra' ); ?></p></div></li>
+      <li><span class="step-n">10</span><div><h3><?php esc_html_e( 'Support', 'zenterra' ); ?></h3><p><?php esc_html_e( 'Optional monthly care from $90/month.', 'zenterra' ); ?></p></div></li>
     </ol>
   </div>
 </section>

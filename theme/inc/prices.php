@@ -11,14 +11,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 function zenterra_prices() {
 	return array(
 		// key            English (USD)      Ukrainian (UAH)
-		'landing'    => array( '$800–1,500',   'від 12 000 грн' ),
-		'company'    => array( '$1,500–2,500', 'від 25 000 грн' ),
-		'advanced'   => array( '$3,500–6,000', 'від 45 000 грн' ),
-		'redesign'   => array( '$1,500–3,000', 'від 15 000 грн' ),
-		'support'    => array( '$100–300',     'від 2 500 грн' ),
-		'audit'      => array( '$800–1,500',   'від 10 000 грн' ),
-		'chatbot'    => array( '$1,500–5,000', 'від 20 000 грн' ),
-		'automation' => array( '$2,000–8,000', 'від 25 000 грн' ),
+		'landing'    => array( '$700–1,300',  'від 10 000 грн' ),
+		'company'    => array( '$1,300–2,100', 'від 21 000 грн' ),
+		'advanced'   => array( '$3,000–5,000', 'від 38 000 грн' ),
+		'redesign'   => array( '$1,300–2,500', 'від 12 000 грн' ),
+		'support'    => array( '$90–250',     'від 2 000 грн' ),
+		'audit'      => array( '$700–1,300',  'від 8 500 грн' ),
+		'chatbot'    => array( '$1,300–4,200', 'від 17 000 грн' ),
+		'automation' => array( '$1,700–6,800', 'від 21 000 грн' ),
 	);
 }
 
